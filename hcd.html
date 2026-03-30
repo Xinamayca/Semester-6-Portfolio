@@ -61,7 +61,7 @@
     <div class="week-panel-body">
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
-        <ul class="week-docs-list">
+        <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('w1', 'research', this)">Research document</li>
           <li class="week-doc-item" onclick="showDoc('w1', 'stakeholder', this)">Stakeholder analysis</li>
         </ul>
@@ -122,18 +122,30 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item active" onclick="showDoc('w2', 'problemstatement', this)">Problem statement definition</li>
+          <li class="week-doc-item active" onclick="showDoc('w2', 'persona', this)">Personas</li>
           <li class="week-doc-item" onclick="showDoc('w2', 'projectplan', this)">Project plan</li>
-          <li class="week-doc-item" onclick="showDoc('w2', 'hmw', this)">How Might We statements</li>
-          <li class="week-doc-item" onclick="showDoc('w2', 'persona', this)">Personas</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <div class="doc-content active" id="w2-problemstatement">
+        <div class="doc-content" id="w2-problemstatement">
           <p class="week-reflection-body">Add your problem statement info here.</p>
         </div>
         <div class="doc-content" id="w2-projectplan">
-          <p class="week-reflection-body">Add your project plan info here.</p>
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Having a project plan helps our group understand the details of our project. Without it, everyone would have a different idea of what we are building, who we are building it for, and what success looks like. I wanted us to have one clear document we could all refer back to throughout the semester.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">In our lectures I actively participated in shaping the Problem Statement Definition, working through what the Humber Office of Sustainability and public visitors actually need, and contributed to generating and refining our HMW questions. I also took the lead on structuring and writing the document itself, making sure everything flowed logically from the problem through to our chosen direction.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">The result is a project plan with nine sections covering everything from the introduction and problem statements to the timeline and risk mitigations. It defines who we are designing for, what we are trying to solve, what the solution needs to do, and what could go wrong. It gave the whole De-Bug Gang a shared foundation to work from going into the next modules.</p>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">This is very much a living document. What we have now is a first draft that helped us get aligned at the start, but things will change as we move through the modules and learn more about the project. For example, as we get into the Software Engineering module our success criteria will likely need to be updated to reflect what we are actually building. So for now it is a bit open ended, but the most important thing was getting something solid down that the whole team could work from.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="Project Plan.pdf" target="_blank" class="doc-btn">Project plan</a>
+          </div>
         </div>
         <div class="doc-content" id="w2-affinity">
           <p class="week-reflection-body">Add your affinity diagram info here.</p>
@@ -141,8 +153,20 @@
         <div class="doc-content" id="w2-hmw">
           <p class="week-reflection-body">Add your How Might We statements info here.</p>
         </div>
-        <div class="doc-content" id="w2-persona">
-          <p class="week-reflection-body">Add your persona info here.</p>
+        <div class="doc-content active" id="w2-persona">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">After conducting our research and stakeholder analysis we had a solid understanding of who we were designing for, but we needed a way to bring that to life. Personas help translate research insights into a real, relatable person so that design decisions stay grounded in actual user needs rather than assumptions.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">Creating personas was a task during one of Paul's lectures. My group and I started with a rough sketch of our first persona, brainstorming his background, goals, frustrations and motivations together. We then brought them to life by generating realistic profiles using AI, turning our rough ideas into fully fleshed out characters.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">Three personas. Matthew Sterling, a 25 year old casual public visitor who wants quick and easy access to information. Laura Bennett, a 34 year old employee at the Humber Office of Sustainability who needs reliable, reportable data. And Fern Walker, a 58 year old retired forest ranger who is knowledgeable but still wants a simple and practical system.</p>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">The personas did not necessarily shift our thinking but they made everything a lot more concrete. Having three distinct people with different needs and frustrations in front of us made it much easier to map out what our tool actually needed to do and helped us prioritize the right features when we moved into building our MoSCoW table.</p>
+          <img src="img/Matthew sketch.png" alt="Matthew Sterling persona sketch" class="doc-img">
+          <img src="img/Persona's.png" alt="Personas" class="doc-img">
         </div>
       </div>
     </div>
@@ -157,14 +181,20 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item">Concept sketches</li>
-          <li class="week-doc-item">Storyboard</li>
-          <li class="week-doc-item">Concept presentation</li>
+          <li class="week-doc-item active" onclick="showDoc('w3', 'sketches', this)">Concept sketches</li>
+          <li class="week-doc-item" onclick="showDoc('w3', 'presentation', this)">Concept presentation</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <p class="week-reflection-label">✦ What happened</p>
-        <p class="week-reflection-body">Add your week 3 description here — what you did, what you made, what you learned.</p>
+        <div class="doc-content active" id="w3-sketches">
+          <p class="week-reflection-body">Add your concept sketches info here.</p>
+        </div>
+        <div class="doc-content" id="w3-storyboard">
+          <p class="week-reflection-body">Add your storyboard info here.</p>
+        </div>
+        <div class="doc-content" id="w3-presentation">
+          <p class="week-reflection-body">Add your concept presentation info here.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -214,10 +244,14 @@
           <p class="week-reflection-body">When I arrived for the final presentation, one of my team members had created a different prototype they also wanted to present, based on a requirements document we had received but weren't really aware of before. It was a bit of a miscommunication on our end as a group. The presentation also didn't have a clear structure yet so we needed to sort that out before going in.</p>
 
           <p class="week-sub">What I did</p>
-          <p class="week-reflection-body">I brought it up with the team and we talked it through — we agreed to include our previous prototypes alongside it so the presentation reflected all the work we had actually done. I also suggested we use the design thinking structure we had been following the whole time to give it a proper flow. Since I'm the only designer in the group I also took care of making the slides look better and consistent with the rest of our documentation.</p>
+          <p class="week-reflection-body">I brought it up with the team and we talked it through, we agreed to include our previous prototypes alongside it so the presentation reflected all the work we had actually done. I also suggested we use the design thinking structure we had been following the whole time to give it a proper flow. Since I'm the only designer in the group I also took care of making the slides look better and consistent with the rest of our documentation.</p>
 
           <p class="week-sub">So</p>
           <p class="week-reflection-body">We did end up getting feedback on the new prototype too, which in hindsight makes sense. They had apparently finished it that morning, I just didn't know about it. That's really on all of us as a team though. If we had communicated better along the way we could have avoided the whole situation. It was a good reminder of how important it is to keep each other in the loop, especially towards the end of a project when everyone is in their own head trying to finish things.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="Eindhoven Final Presentation.pdf" target="_blank" class="doc-btn">Final presentation</a>
+          </div>
         </div>
       </div>
     </div>
