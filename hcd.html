@@ -17,9 +17,17 @@
   <a href="index.html" class="nav-logo">Xinamayca</a>
   <ul class="nav-links">
     <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#journey">Journey</a></li>
+    <li><a href="index.html#journey">Memories</a></li>
     <li><a href="index.html#goals">Goals</a></li>
-    <li><a href="index.html#modules">Modules</a></li>
+    <li class="nav-dropdown">
+      <a href="index.html#modules">Modules</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="hcd.html">Human Centered Design</a></li>
+        <li><a href="se.html">Software Engineering</a></li>
+        <li><a href="iot.html">Internet of Things</a></li>
+        <li><a href="ai.html">Artificial Intelligence</a></li>
+      </ul>
+    </li>
     <li><a href="index.html#conclusion">Conclusion</a></li>
   </ul>
   <span class="nav-tag">Global Acting in IT · 2026</span>
@@ -53,10 +61,9 @@
     <div class="week-panel-body">
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
-        <ul class="week-doc-list">
+        <ul class="week-docs-list">
           <li class="week-doc-item active" onclick="showDoc('w1', 'research', this)">Research document</li>
           <li class="week-doc-item" onclick="showDoc('w1', 'stakeholder', this)">Stakeholder analysis</li>
-          <li class="week-doc-item" onclick="showDoc('w1', 'personas', this)">Personas</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -83,8 +90,18 @@
         </div>
 
         <div class="doc-content" id="w1-stakeholder">
-          <p class="week-reflection-label">✦ Stakeholder analysis</p>
-          <p class="week-reflection-body">Add your stakeholder analysis info here.</p>
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Understanding the needs, goals, pain points and concerns of each stakeholder was essential before we could make any design decisions. Knowing who we were designing for and what they actually struggled with meant we could prioritize the right things later in the process rather than guessing.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">We did this together as a group on the whiteboard, researching and filling in the analysis in real time. We ended up analyzing multiple stakeholders including citizen scientists and the Toronto Region Conservation Authority. I participated in the session and contributed to identifying and mapping out each stakeholder's role, goals and pain points.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">A stakeholder analysis mapping out the roles, goals and pain points of multiple stakeholders including citizen scientists and the Toronto Region Conservation Authority.</p>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">Even though we ultimately did not move forward with the citizen scientists and the Toronto Region Conservation Authority that we analyzed, the exercise was still really valuable. Going through their perspectives gave us a much broader understanding of the project space and helped us make a more informed and confident decision about who to focus on. We ended up choosing the Humber Office of Sustainability as it is the most important stakeholder and public visitors as our secondary. We also had the chance to review all the other stakeholder analyses from the other teams and ended up using the public visitors analysis from a different team.</p>
+          <img src="img/Stakeholder Analysis.png" alt="Stakeholder Analysis" class="doc-img">
         </div>
 
         <div class="doc-content" id="w1-personas">
@@ -105,14 +122,28 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item">Affinity diagram</li>
-          <li class="week-doc-item">How Might We statements</li>
-          <li class="week-doc-item">Persona</li>
+          <li class="week-doc-item active" onclick="showDoc('w2', 'problemstatement', this)">Problem statement definition</li>
+          <li class="week-doc-item" onclick="showDoc('w2', 'projectplan', this)">Project plan</li>
+          <li class="week-doc-item" onclick="showDoc('w2', 'hmw', this)">How Might We statements</li>
+          <li class="week-doc-item" onclick="showDoc('w2', 'persona', this)">Personas</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <p class="week-reflection-label">✦ What happened</p>
-        <p class="week-reflection-body">Add your week 2 description here — what you did, what you made, what you learned.</p>
+        <div class="doc-content active" id="w2-problemstatement">
+          <p class="week-reflection-body">Add your problem statement info here.</p>
+        </div>
+        <div class="doc-content" id="w2-projectplan">
+          <p class="week-reflection-body">Add your project plan info here.</p>
+        </div>
+        <div class="doc-content" id="w2-affinity">
+          <p class="week-reflection-body">Add your affinity diagram info here.</p>
+        </div>
+        <div class="doc-content" id="w2-hmw">
+          <p class="week-reflection-body">Add your How Might We statements info here.</p>
+        </div>
+        <div class="doc-content" id="w2-persona">
+          <p class="week-reflection-body">Add your persona info here.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -147,14 +178,47 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item">Lo-fi prototype</li>
-          <li class="week-doc-item">Usability test report</li>
-          <li class="week-doc-item">Final presentation</li>
+          <li class="week-doc-item active" onclick="showDoc('w4', 'usability', this)">Usability test plan</li>
+          <li class="week-doc-item" onclick="showDoc('w4', 'presentation', this)">Final presentation</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <p class="week-reflection-label">✦ What happened</p>
-        <p class="week-reflection-body">Add your week 4 description here — what you did, what you made, what you learned.</p>
+        <div class="doc-content active" id="w4-usability">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Before running our usability test we needed a clear plan to make sure we were testing the right things and heading in the right direction with our design. Without a structured plan we would just be testing randomly without knowing what we were actually trying to find out.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">After Paul's lecture on usability testing I worked with my team to brainstorm two scenarios we wanted to test. I contributed to defining these scenarios and built out the plan using information from the lecture slides, with the help of AI to structure it properly.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">A usability test plan with two test scenarios:</p>
+          <ul class="week-list-body">
+            <li>Finding out whether users can find and view pictures and information for a landscape element without guidance</li>
+            <li>Whether they can successfully add information for a new landscape element using the app</li>
+          </ul>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">A lot of this was already familiar to me from previous experience, so the plan felt more like a refresher than something completely new. Going through it together as a team was where the real value was for me. The test gave us some small but useful tweaks to our design, like adding a confirmation pop up after adding a tree. We also observed some bigger pain points, like users struggling to find the map, which are things we still need to work on to make the overall app flow smoother.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="Arboretum  Usability Test Plan.pdf" target="_blank" class="doc-btn">Usability test plan</a>
+          </div>
+        </div>
+
+        <div class="doc-content" id="w4-prototype">
+          <p class="week-reflection-body">Add your lo-fi prototype info here.</p>
+        </div>
+
+        <div class="doc-content" id="w4-presentation">
+          <p class="week-sub">What happened</p>
+          <p class="week-reflection-body">When I arrived for the final presentation, one of my team members had created a different prototype they also wanted to present, based on a requirements document we had received but weren't really aware of before. It was a bit of a miscommunication on our end as a group. The presentation also didn't have a clear structure yet so we needed to sort that out before going in.</p>
+
+          <p class="week-sub">What I did</p>
+          <p class="week-reflection-body">I brought it up with the team and we talked it through — we agreed to include our previous prototypes alongside it so the presentation reflected all the work we had actually done. I also suggested we use the design thinking structure we had been following the whole time to give it a proper flow. Since I'm the only designer in the group I also took care of making the slides look better and consistent with the rest of our documentation.</p>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">We did end up getting feedback on the new prototype too, which in hindsight makes sense. They had apparently finished it that morning, I just didn't know about it. That's really on all of us as a team though. If we had communicated better along the way we could have avoided the whole situation. It was a good reminder of how important it is to keep each other in the loop, especially towards the end of a project when everyone is in their own head trying to finish things.</p>
+        </div>
       </div>
     </div>
   </div>

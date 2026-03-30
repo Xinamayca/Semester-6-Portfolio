@@ -17,9 +17,17 @@
   <a href="#" class="nav-logo">Xinamayca</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#journey">Journey</a></li>
+    <li><a href="#journey">Memories</a></li>
     <li><a href="#goals">Goals</a></li>
-    <li><a href="#modules">Modules</a></li>
+    <li class="nav-dropdown">
+      <a href="#modules">Modules</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="hcd.html">Human Centered Design</a></li>
+        <li><a href="se.html">Software Engineering</a></li>
+        <li><a href="iot.html">Internet of Things</a></li>
+        <li><a href="ai.html">Artificial Intelligence</a></li>
+      </ul>
+    </li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
   <span class="nav-tag">Global Acting in IT · 2026</span>
@@ -79,10 +87,9 @@
   <div class="about-grid">
     <div class="about-text reveal">
       <p>Thought you would never ask!</p>
-      <p>I'm <strong>Xinamayca de Cuba</strong>, 21 years old and from the island of Aruba. I'm currently in my 6th semester at Fontys Eindhoven studying <strong>ICT & Media Design</strong>, where I get to mix creativity with technology in a way that actually means something.</p>
-      <p>I have a strong interest in user experience design and I love applying design thinking to create solutions that are both functional and meaningful for the people using them.</p>
-      <p>I chose this minor because it brought together two things I do not compromise on: doing work that has real impact and experiencing the world. Not everyone gets this kind of opportunity and I was not about to let it pass me by. Traveling, connecting with people from different backgrounds and learning about new cultures is something I aspire to do throughout my life.</p>
-      <p>Outside of my studies I am a pretty outgoing person. You will find me at the gym or deep in a new playlist. I also hope to compete this year in <span class="highlight-box">Olympic weightlifting</span> representing Aruba!</p>
+      <p>My name is <strong>Xinamayca de Cuba</strong>. I come from Aruba, I'm 21 years old and currently doing my 6th semester at Fontys Eindhoven. I have a background in <strong>Media & Design</strong>, where I get to explore my creativity in a professional and meaningful way.</p>
+      <p>I chose to join this minor because it brought together two things that are important to me: doing <strong>impactful work</strong> and <strong>experiencing the world</strong>. I am aware that opportunities like this are not available to everyone, which is why I did not hesitate to take it. Being able to travel, connect with people from different backgrounds and learning about new cultures is something I aspire to do throughout my life. Getting to do all of that while contributing to a real sustainability project across four countries is an incredible opportunity.</p>
+      <p>Outside of school I would consider myself to be a very outgoing person. I spend a lot of time in the gym, discovering new music or in the club XP. I also hope to compete this year in <strong>Olympic weightlifting</strong> representing the island!!</p>
     </div>
     <div class="about-visual reveal">
       <img src="img/mayca.png" alt="Xinamayca de Cuba" class="about-photo">
@@ -94,18 +101,22 @@
 
 <!-- JOURNEY -->
 <section id="journey">
-  <p class="section-tag reveal">✦ Along the way</p>
-  <h2 class="section-title reveal">THE JOURNEY</h2>
-  <p class="gallery-label reveal">Class moments, cities & memories — updated as the semester goes on</p>
+  <div class="section-header-row">
+    <div>
+      <p class="section-tag reveal">✦ Say cheess!!</p>
+      <h2 class="section-title reveal">MEMORIES</h2>
+    </div>
+    <p class="gallery-label reveal">Class moments, cities & memories,<br>updated as the semester goes on</p>
+  </div>
   <div class="polaroid-grid reveal">
-    <div class="polaroid"><div class="polaroid-img"><span>Eindhoven</span></div><span class="polaroid-caption">Eindhoven ✦</span></div>
+    <div class="polaroid" onclick="openLightbox('img/eind-00.jpeg')"><div class="polaroid-img"><img src="img/eind-00.jpeg" alt="Eindhoven"></div><span class="polaroid-caption">Eindhoven ✦</span></div>
     <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Vienna ✦</span></div>
     <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Chania ✦</span></div>
     <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Toronto ✦</span></div>
     <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">De-Bug Gang ✦</span></div>
-    <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Field trip ✦</span></div>
+    <div class="polaroid" onclick="openLightbox('img/field-trip.JPG')"><div class="polaroid-img"><img src="img/field-trip.JPG" alt="Field trip"></div><span class="polaroid-caption">Field trip ✦</span></div>
     <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Project work ✦</span></div>
-    <div class="polaroid"><div class="polaroid-img"><span>coming soon</span></div><span class="polaroid-caption">Good times ✦</span></div>
+    <div class="polaroid" onclick="openLightbox('img/good-times.jpg')"><div class="polaroid-img"><img src="img/good-times.jpg" alt="Good times"></div><span class="polaroid-caption">Good times ✦</span></div>
   </div>
 </section>
 
@@ -192,6 +203,19 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
 <script src="script.js"></script>
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+</script>
 </body>
 </html
