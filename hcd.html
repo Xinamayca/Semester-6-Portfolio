@@ -51,6 +51,7 @@
     <button class="week-tab" onclick="showWeek(2, this)">Week 2</button>
     <button class="week-tab" onclick="showWeek(3, this)">Week 3</button>
     <button class="week-tab" onclick="showWeek(4, this)">Week 4</button>
+    <button class="week-tab" onclick="showWeek('reflection', this)">Retrospective</button>
   </div>
 
   <!-- Week 1 -->
@@ -242,13 +243,13 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item active" onclick="showDoc('w4', 'usability', this)">Usability test plan</li>
-          <li class="week-doc-item" onclick="showDoc('w4', 'prototype', this)">Prototype</li>
+          <li class="week-doc-item active" onclick="showDoc('w4', 'prototype', this)">Prototype</li>
+          <li class="week-doc-item" onclick="showDoc('w4', 'usability', this)">Usability test plan</li>
           <li class="week-doc-item" onclick="showDoc('w4', 'presentation', this)">Final presentation</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <div class="doc-content active" id="w4-usability">
+        <div class="doc-content" id="w4-usability">
           <p class="week-sub">Why</p>
           <p class="week-reflection-body">Before running our usability test we needed a clear plan to make sure we were testing the right things and heading in the right direction with our design. Without a structured plan we would just be testing randomly without knowing what we were actually trying to find out.</p>
 
@@ -270,7 +271,7 @@
           </div>
         </div>
 
-        <div class="doc-content" id="w4-prototype">
+        <div class="doc-content active" id="w4-prototype">
           <p class="week-reflection-body">Add your prototype info here.</p>
         </div>
 
@@ -287,6 +288,30 @@
           <div class="doc-btn-row">
             <a href="Eindhoven Final Presentation.pdf" target="_blank" class="doc-btn">Final presentation</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="week-panel" id="week-reflection">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Retrospective</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Topics</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('wr', 'group', this)">Group retrospective</li>
+          <li class="week-doc-item" onclick="showDoc('wr', 'personal', this)">Personal reflection</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="wr-group">
+          <p class="week-reflection-body">Add your group retrospective here.</p>
+        </div>
+        <div class="doc-content" id="wr-personal">
+          <p class="week-reflection-body">Add your personal reflection here.</p>
         </div>
       </div>
     </div>
