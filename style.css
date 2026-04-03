@@ -89,7 +89,7 @@ nav {
 .hero-map:hover path { fill: var(--blue); }
 .hero-map-link { display: contents; cursor: none; }
 .map-tooltip-wrap { position: absolute; }
-.map-tooltip-wrap::after { content: attr(data-tooltip); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--black); color: white; font-family: 'Epilogue', sans-serif; font-size: 11px; letter-spacing: .08em; white-space: nowrap; padding: .4rem .75rem; pointer-events: none; opacity: 0; transition: opacity .2s; z-index: 9999; }
+.map-tooltip-wrap::after { content: attr(data-tooltip); position: absolute; bottom: calc(100% + 8px); top: auto; left: 50%; transform: translateX(-50%); background: var(--black); color: white; font-family: 'Epilogue', sans-serif; font-size: 11px; letter-spacing: .08em; white-space: nowrap; padding: .4rem .75rem; pointer-events: none; opacity: 0; transition: opacity .2s; z-index: 9999; }
 .map-tooltip-wrap:hover::after { opacity: 1; }
 .hero-map-nl { width: 180px; }
 .map-tooltip-wrap:first-child { top: 0; left: 0; }
