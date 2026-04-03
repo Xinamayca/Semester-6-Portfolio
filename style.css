@@ -95,9 +95,9 @@ nav {
 .map-tooltip-wrap:first-child { top: 0; left: 0; }
 .map-wrap-at { top: 0; left: 200px; }
 .map-wrap-at .hero-map-at { width: 320px; }
-.map-wrap-gr { top: 250px; left: -30px; }
+.map-wrap-gr { top: 270px; left: -30px; }
 .map-wrap-gr .hero-map-gr { width: 250px; }
-.map-wrap-ca { top: 220px; left: 260px; }
+.map-wrap-ca { top: 240px; left: 260px; }
 .map-wrap-ca .hero-map-ca { width: 320px; }
 
 /* SECTION BASE */
