@@ -59,9 +59,38 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('se1', 'lasr', this)">LASR Cards</li>
         </ul>
       </div>
       <div class="week-reflection">
+        <div class="doc-content active" id="se1-lasr">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">We were assigned the LASR card exercise on day one as a way to align on quality attributes before making any architecture decisions. I had no idea what LASR cards were going in, so it was all new to me.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">We went through the cards as a group, debating each one against our project context, the Humber Arboretum dashboard and field app. I contributed by thinking along and arguing for what made sense from a user perspective.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">We landed on Usability, Functional Suitability, Scalability, Cost Efficiency, and Compatibility as our top 5:</p>
+          <ul class="week-list-body">
+            <li><strong>Usability</strong> — we have two very different user groups, sustainability staff and regular visitors. If the system isn't easy to use neither group will actually use it.</li>
+            <li><strong>Functional Suitability</strong> — the system needs to actually do what it promises. For an ecological monitoring tool that feeds into ESG reports the data and features need to be correct.</li>
+            <li><strong>Scalability</strong> — the Humber Office mentioned they want the system to grow and eventually be maintained by their own staff. So it can't be something overly complex that only a developer team can touch.</li>
+            <li><strong>Cost Efficiency</strong> — they also flagged low cost as a requirement. University sustainability office, not a startup with funding. The system needs to be affordable to run and scale.</li>
+            <li><strong>Compatibility</strong> — the dashboard needs to work on desktop, the field app on mobile, and the system may need to connect with tools the Humber Office already uses.</li>
+          </ul>
+          <p class="week-reflection-body">Things like Reliability and Safety ended up lower, not because they don't matter, but they weren't the priority for our context.</p>
+          <p class="week-reflection-body">After picking our top 5 we didn't just leave them as card titles either. We deepened each one into a proper definition with concrete measurements and priorities. So Usability for example became something specific like the interface needing to meet WCAG 2.1 standards and users being able to onboard within 2 minutes. The full quality attribute breakdown is included as a supporting document.</p>
+          <img src="img/LASR.png" alt="LASR Cards" class="doc-img" onclick="openLightbox('img/LASR.png')" style="cursor:pointer;">
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">The architecture lecture that followed went mostly over my head, but the baseline I took from it was that it's kind of like design, there's a structure to the decisions you make, it's just written in a language I don't speak yet. And honestly? I might never speak it. I'm just a girl. But understanding that software architecture follows similar patterns of intentional decision making as design is enough for me to keep up and contribute where I'm capable of this module.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="quality_attributes.pdf" target="_blank" class="doc-btn">Quality attributes</a>
+            <a href="Quality Attributes2.pdf" target="_blank" class="doc-btn">Quality attributes 2</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -76,7 +105,18 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
 <script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
 function showWeekSE(num, btn) {
   document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.week-tab').forEach(b => b.classList.remove('active'));
