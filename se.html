@@ -48,18 +48,22 @@
   <!-- Week navigation -->
   <div class="week-nav reveal">
     <button class="week-tab active" onclick="showWeekSE(1, this)">Week 1</button>
+    <button class="week-tab" onclick="showWeekSE(2, this)">Week 2</button>
+    <button class="week-tab" onclick="showWeekSE(3, this)">Week 3</button>
   </div>
 
   <!-- Week 1 -->
   <div class="week-panel active" id="se-week-1">
     <div class="week-panel-header">
-      <h2 class="week-panel-title">Week 1</h2>
+      <h2 class="week-panel-title">Online week</h2>
     </div>
     <div class="week-panel-body">
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('se1', 'lasr', this)">LASR Cards</li>
+          <li class="week-doc-item" onclick="showDoc('se1', 'functional', this)">Functional Requirements</li>
+          <li class="week-doc-item" onclick="showDoc('se1', 'component', this)">Component Diagram</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -91,6 +95,86 @@
             <a href="Quality Attributes2.pdf" target="_blank" class="doc-btn">Quality attributes 2</a>
           </div>
         </div>
+
+        <div class="doc-content" id="se1-functional">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">This was part of our first week assignment. Before we could build anything, I needed to understand how our users translated into actual system requirements. The personas we worked on together during HCD were already there, so now it was about figuring out what the system actually needed to do for each of them.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">The team worked through the requirements together but the developers took the lead since they had the knowledge to know what was technically feasible. I was there during the decision making and contributed where I could, mostly from a user perspective since that is my domain.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">We ended up with three functional requirements linked directly to our personas. The Busy Visitor needed an interactive map of the arboretum with labelled landscape elements filterable by category. The Sustainability Pro needed a real-time metrics dashboard with export and filtering options. The Nature Visitor needed an observation logger where they could submit geo-tagged observations including species, photos and notes that feed into the ecological database.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">What I found interesting was seeing how directly the personas translated into features. It connected the HCD work we did in Eindhoven to the software decisions being made here in Vienna, which made it feel less like two separate worlds.</p>
+          <hr class="doc-divider">
+          <img src="img/Functional_Req.jpg" alt="Functional Requirements" class="doc-img">
+        </div>
+
+        <div class="doc-content" id="se1-component">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">After aligning on our quality attributes, the next step was figuring out how the system would actually be structured. The developers on the team took the lead on this one (again).</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">The developers put together a component diagram showing how all the pieces of our system connect. I contributed by following along and agreeing on the direction, honestly this was more their territory than mine.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">The diagram shows two frontends, the HOoS Dashboard as a web app and the Mobile App, both connecting to a backend RESTful service via REST API and HTTPS. The backend, likely Supabase, handles three databases: one for entries, one for user data, and one for image storage. There is also a separate server that runs AI models for anomaly classification. The team went with REST API and Supabase specifically because some members had worked with them before and it was the most straightforward option for the team.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Looking at it now I can see it is a client server, component based setup. Not a full monolith, not microservices, somewhere in between which the lecture said is pretty normal for real systems.</p>
+          <hr class="doc-divider">
+          <img src="img/comp_diagram.png" alt="Component Diagram" class="doc-img" onclick="openLightbox('img/comp_diagram.png')" style="cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week-panel" id="se-week-3">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 3</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('se3', 'orm', this)">ORM – Object Relational Mapping</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="se3-orm">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">For the Software Engineering module I had to learn how to work with databases in C#. Instead of writing raw SQL, we use an ORM to interact with the database using regular code.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I used Entity Framework Core with an in memory database. I created a Purchase class with properties like ProductName and Price, and a DbContext class called bobsdatabase that acts as the connection to the database. I added three purchases, saved them, and printed them to the console.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">ORM stands for Object Relational Mapping. It maps your code objects (classes) to database tables. So instead of writing SQL like SELECT * FROM Purchases, you just write db.Purchases.ToList(). My teacher compared it to a written Excel sheet. Each table is a sheet, each row is an entry, each column is a property.</p>
+
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">I got my first C# database program running and could see the data printed in the console. What is exciting is that going from knowing nothing about this, I can at least semi understand what the file is doing now. Next I will be manipulating the data by adding, updating and deleting entries to complete the full CRUD task.</p>
+          <hr class="doc-divider">
+          <img src="img/ORM_1.png" alt="ORM" class="doc-img" onclick="openLightbox('img/ORM_1.png')" style="cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="week-panel" id="se-week-2">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 2</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+        </ul>
+      </div>
+      <div class="week-reflection">
       </div>
     </div>
   </div>
