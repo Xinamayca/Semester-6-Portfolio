@@ -172,9 +172,51 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('se2', 'terra', this)">Terra Design</li>
+          <li class="week-doc-item" onclick="showDoc('se2', 'mvp', this)">MVP Definition</li>
         </ul>
       </div>
       <div class="week-reflection">
+        <div class="doc-content active" id="se2-terra">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">I made the decision early on to create a separate brand identity rather than tying everything to the Humber Arboretum. The reasoning was simple. If the Humber Office of Sustainability ever wanted to expand the platform to other green spaces in the future, the branding should not limit them to one location. This also came from feedback we received in the previous module. Our teachers pointed out that the app lacked visual cohesion, different screens felt disconnected, like they were not part of the same product. That pushed me to take ownership of the brand and make sure everything from this point forward felt like one consistent system.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">The name Terra came to me naturally. In Papiamentu, my native language from Aruba, "tera" means ground, and it also means earth in Latin. That felt like more than a coincidence. It captured exactly what the platform is about, monitoring the land, understanding what is growing on it, and protecting it. The colours had already been taking shape since our early prototypes, so the direction was already there. All I had left to do was lock in the hex codes. Forest green as the primary, cream as the background, mint as an accent, and near black for text. Once they were set, I committed to them fully.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">The result was a full design system covering colours, typography, components, and map pins, so that anyone on the team building a screen would be working from the same foundation. Georgia handles the logo wordmark and headings, giving Terra an editorial, grounded quality. DM Sans keeps the UI clean and readable. The leaf icon is simple enough to work at any size but detailed enough to carry meaning. The veins reference the way ecological data flows through the platform, from individual field observations up to the full landscape picture.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Terra is not just a name or a logo. It is the thing that holds the whole platform together visually. Having a clear brand identity meant the team had something to build towards, and it meant the product finally felt like one thing instead of a collection of screens.</p>
+          <hr class="doc-divider">
+          <p class="week-reflection-body" style="color: var(--muted); font-style: italic;">This is the new prototype with the new design</p>
+          <img src="img/Terra_screens.png" alt="Terra screens" class="doc-img" onclick="openLightbox('img/Terra_screens.png')" style="cursor:pointer;">
+        </div>
+
+        <div class="doc-content" id="se2-mvp">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">As a team we needed to get aligned on what we were actually building before anyone started doing anything. Developers have a tendency to want to build everything at once and lose the plot, so having a clear MVP definition was as much about keeping the team in scope as it was about having a plan. For me personally it also meant I knew exactly which screens to prototype and did not waste time designing things that were not getting built yet.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">We defined the MVP together as a team. I made sure to write it down and document it properly so we all had something concrete to refer back to. The core idea was simple, build the smallest version of the platform that proves the main loop works. A visitor logs an observation in the field and that data ends up in a system that staff can act on.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">We ended up with two MVPs that work together as one system:</p>
+          <ul class="week-list-body">
+            <li><strong>Field App MVP</strong> — a mobile web app for visitors to log in, explore the map, view tree info, and submit observations. It covers 6 screens: Login, Map, Tree Detail, Camera, Add Entry Form, and Confirmation.</li>
+            <li><strong>Staff Dashboard MVP</strong> — a web dashboard for sustainability staff to see the landscape inventory and review visitor submissions. It covers 4 screens: Login, Dashboard Map, Element Detail Panel, and Observation Review.</li>
+          </ul>
+          <br>
+          <p class="week-reflection-body">Everything else, native apps, offline maps, AI models, ESG reports, went into the out of scope column. If it was not in the left column it did not get built yet.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Having this written down saved us a lot of time and probably a lot of arguments. It gave me a clear design brief and gave the team a shared reference point to come back to whenever things started creeping out of scope.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="MVP Definition.pdf" target="_blank" class="doc-btn">MVP Definition</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
