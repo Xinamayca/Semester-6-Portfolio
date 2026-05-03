@@ -50,6 +50,8 @@
     <button class="week-tab active" onclick="showWeekSE(1, this)">Week 1</button>
     <button class="week-tab" onclick="showWeekSE(2, this)">Week 2</button>
     <button class="week-tab" onclick="showWeekSE(3, this)">Week 3</button>
+    <button class="week-tab" onclick="showWeekSE(5, this)">Week 5</button>
+    <button class="week-tab" onclick="showWeekSE('reflection', this)">Reflection</button>
   </div>
 
   <!-- Week 1 -->
@@ -140,11 +142,33 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item active" onclick="showDoc('se3', 'orm', this)">ORM – Object Relational Mapping</li>
+          <li class="week-doc-item active" onclick="showDoc('se3', 'setup', this)">Setup and First Commits</li>
+          <li class="week-doc-item" onclick="showDoc('se3', 'orm', this)">ORM – Object Relational Mapping</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <div class="doc-content active" id="se3-orm">
+        <div class="doc-content active" id="se3-setup">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">The software module officially moved from planning to building this week. Which meant I had to actually get the project running on my laptop. That sounds simple. It was not. Before I could contribute any code I needed to get the full development environment set up locally. Every team member had to follow the same setup process so we were all running the same thing.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">Armend and Adrian sat with me and helped me get everything running. I followed the RUNNING.md guide Adrian had written but honestly without them next to me I would not have gotten through it. The setup involved installing Node.js, Docker Desktop, Expo Go, ngrok, cloning the repo, installing dependencies, setting up environment variables and running the right make commands just to get the app to show up on my phone. On a university network like eduroam it was even more complicated because you need tunnels to connect everything. It took a while but we got there.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">Once the setup was done I made my first commits to the codebase. That week I worked on:</p>
+          <ul class="week-list-body">
+            <li>Adding the Terra logo and brand icon as SVG and PNG assets to the project</li>
+            <li>Adding the leaf icon as a separate asset</li>
+            <li>Building the navbar on the map screen in TypeScript and TSX</li>
+          </ul>
+          <br>
+          <p class="week-reflection-body">These were my first real commits to a shared codebase with a proper Git workflow. Small steps but they felt significant.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Getting set up was genuinely one of the hardest parts of this module for me. Not because the instructions were bad but because every step assumed a level of technical knowledge I did not have yet. Having Armend and Adrian there made it possible. Once I was in though, I was in. And making those first commits felt like crossing a line I had not crossed before.</p>
+        </div>
+
+        <div class="doc-content" id="se3-orm">
           <p class="week-sub">Why</p>
           <p class="week-reflection-body">For the Software Engineering module I had to learn how to work with databases in C#. Instead of writing raw SQL, we use an ORM to interact with the database using regular code.</p>
 
@@ -163,6 +187,91 @@
     </div>
   </div>
 
+  <!-- Reflection -->
+  <div class="week-panel" id="se-week-reflection">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Reflection</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Topics</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('ser', 'personal', this)">Personal Reflection</li>
+          <li class="week-doc-item" onclick="showDoc('ser', 'intercultural', this)">Intercultural Development</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content" id="ser-intercultural">
+          <p class="week-sub">Individualism vs Collectivism</p>
+          <p class="week-reflection-body">Coming into Vienna I already had a better idea of how our team worked and where things could go wrong. After Eindhoven I reflected on it properly using Hofstede's dimensions and I went in this time actually wanting to do things differently. And I did.</p>
+          <p class="week-reflection-body">Same team, same mix of backgrounds but this time we already knew each other which made a huge difference. The cold independent working from Eindhoven was mostly gone. It felt more like an actual team. We also actually used our Jira board properly this module which sounds small but it genuinely kept everyone on track and tasks got finished. I also showed up more, was less late and spoke up about what I wanted to work on instead of just going with whatever was decided. That changed a lot for me personally.</p>
+
+          <p class="week-sub">Power Distance</p>
+          <p class="week-reflection-body">Adrian stepped up as our technical lead this module and honestly it worked. Every decision was made by the right person with the right background for it. Technical decisions went to the developers, design decisions came to me and people actually listened. I did not feel intimidated or overpowered this time around. When I had an opinion especially on the design side, it was heard and we ended up going with it. That made me feel a lot more included and confident in my role.</p>
+
+          <p class="week-sub">Uncertainty Avoidance</p>
+          <p class="week-reflection-body">In Eindhoven I would sit with confusion and avoid asking for help until things boiled over. This time I just asked. Setting up the project was painful and I needed help multiple times but I asked every time instead of suffering in silence. When something was unclear I said so. It sounds simple but for me it was a real shift and it made the whole experience less stressful.</p>
+
+          <p class="week-sub">Motivation towards Achievement and Success</p>
+          <p class="week-reflection-body">The team still makes comments like "we are the best group" which used to get on my nerves a little. But honestly this time it is kind of true so I let it slide. We delivered something real, something we were all proud of, and Adrian actually thanked us for our efforts at the end. That felt genuinely earned and not just performative. That hit different.</p>
+
+          <p class="week-sub">What I learned</p>
+          <p class="week-reflection-body">The biggest thing I took away from Vienna compared to Eindhoven is that how you show up changes everything. I was more present, voiced myself more and was overall more connected with my team. That made us work in a better collaboration than the previous module and honestly the results speak for themselves.</p>
+        </div>
+
+        <div class="doc-content active" id="ser-personal">
+          <p class="week-reflection-body">This module got off to a rough start. Coming straight out of the design module I did not feel connected or part of the team right away. On top of that, adjusting to Vienna as a city was surprisingly harder than I expected.<br><br></p>
+          <p class="week-reflection-body">An Austrian told me very early on that Austrian people are not so kind. I did some digging and found enough to understand what she meant. Vienna is famously described as one of the most livable and at the same time one of the most unfriendly cities in the world. Coming from Aruba where everyone greets you like a family member, it felt like being thrown to the wolves. I had moments with other Austrians where even they acknowledged the performative posh side of their own culture. I did not enjoy the city as much as I thought I would. But I took away things I would not have found elsewhere. Starting with finding my future coach for my sport outside of my studies.<br><br></p>
+          <p class="week-reflection-body">I hit the gym often during my stay and ended up meeting an Olympic weightlifting coach named Klaus. Being in that gym, surrounded by people working toward the same goals, I felt connected in a way I do not always feel at my gym back in Eindhoven. I felt like I belonged. No matter where everyone came from or what their background was, on the lifting platform everyone is after the same thing and we push each other. That was unexpected and I am genuinely grateful for it. I am planning to stay in contact with Klaus and continue working with him going forward. It taught me that it matters who you surround yourself with.<br><br></p>
+          <p class="week-reflection-body">That lesson carried into the project too. Working with students from different cultural backgrounds, even though we all came from different places and different disciplines, we were all there to do our best on this project together. More so than the previous module, we connected as a team and we managed to deliver a product we were all proud of. That same energy of showing up and pushing each other forward made the difference.<br><br></p>
+          <p class="week-reflection-body">Being able to build a completely new brand and design for Terra and then seeing it on the dashboard in all its glory, working cohesively as one product, has been one of the highlights of this module. And being able to contribute not just in design but also in code has made a real difference. I also did better this module in showing up for my team. I was more present, less late than last module, and I spoke up more about what I wanted to work on. By the end of the module my connection with the team had grown a lot, especially with Adrian who I had clashed with early on. He actually thanked us for our efforts because the results spoke for themselves. That meant a lot to me. I felt proud to be part of healing whatever trauma he had from previous group members not pulling their weight, and showing him that there are people who show up and get things done.<br><br></p>
+          <p class="week-reflection-body">Looking back at my learning goals, one of them was simply to walk away from this minor having learned something I genuinely did not know before. My background is in design and media and the technical side of things was completely unfamiliar to me going in. Whether software, infrastructure or anything in between, I just wanted to grow beyond design. And I did. Honestly about 80 percent of what I have written in this portfolio are things I had genuinely never heard of before this module. Quality attributes, architecture styles, component diagrams, TypeScript, Supabase, Docker, Git workflows in a real team. All of it was new. I cannot say I fully understand all of it now but I have a solid foundation and a beginning understanding of what actually happens behind the scenes of a product. That is more than I came in with and that is what I was after.<br><br></p>
+          <p class="week-reflection-body">For me personally, having a connection with the people around you and the environment you are in makes a big difference. Vienna was not what I expected. But I found my place in it. In the gym with Klaus and the people around me, and in the team with people who actually showed up and got things done. That is enough for me to look back on this module with something good.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 5 -->
+  <div class="week-panel" id="se-week-5">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 5</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('se5', 'techstack', this)">Tech Stack</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="se5-techstack">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">In week 2 the team needed to decide what we were actually going to build with before anyone wrote a single line of code. I had never heard of any of the technologies we ended up choosing before this module so this was a learning moment for me from the start.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">The team discussed the options together and the developers took the lead since they had the knowledge to evaluate what made sense technically. I listened, asked questions, and made sure I understood at least the basics of why each choice was made.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">We landed on the following stack:</p>
+          <ul class="week-list-body">
+            <li><strong>Next.js</strong> — the main framework for building both the Field App and the Staff Dashboard. A framework is basically a pre-built set of tools that makes building web apps faster and more structured so the team could focus on the actual product.</li>
+            <li><strong>TypeScript</strong> — a version of JavaScript that adds rules around how code is written, making the codebase easier to maintain across the whole team.</li>
+            <li><strong>Supabase</strong> — handles the database, authentication, file storage and real-time data. The alternative was setting up PostgreSQL directly but Supabase wraps PostgreSQL and adds everything on top so you get it all in one place. The SQL functions were a big factor and the UI is straightforward enough to manage without a dedicated database expert.</li>
+            <li><strong>Expo Go</strong> — used for developing and testing the mobile app on real devices. The alternative was React Native CLI which is much more complex, or building fully native apps in Swift and Kotlin which would have meant two separate codebases. Expo Go gave the team a real mobile app without the painful setup.</li>
+            <li><strong>OSM (OpenStreetMap)</strong> — provides the actual map data. The alternative was Google Maps but that comes with a cost. OpenStreetMap is open source and free, which directly aligned with our Cost Efficiency quality attribute.</li>
+            <li><strong>Docker</strong> — makes sure every team member runs the exact same development environment on their own computer, avoiding the situation where something works on one machine but breaks on another.</li>
+          </ul>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Looking at the stack now I can see how the choices connect back to the quality attributes we defined in week 1. Supabase supports our Scalability requirements, OpenStreetMap directly addresses Cost Efficiency, and Expo Go supports Compatibility since it works across devices. The decisions were not random, they tied back to what the team agreed mattered most from the start.</p>
+          <hr class="doc-divider">
+          <img src="img/tech_stack.png" alt="Tech Stack" class="doc-img" onclick="openLightbox('img/tech_stack.png')" style="cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Week 2 -->
   <div class="week-panel" id="se-week-2">
     <div class="week-panel-header">
@@ -174,6 +283,7 @@
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('se2', 'terra', this)">Terra Design</li>
           <li class="week-doc-item" onclick="showDoc('se2', 'mvp', this)">MVP Definition</li>
+          <li class="week-doc-item" onclick="showDoc('se2', 'architecture', this)">Software Architecture</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -196,7 +306,7 @@
 
         <div class="doc-content" id="se2-mvp">
           <p class="week-sub">Why</p>
-          <p class="week-reflection-body">As a team we needed to get aligned on what we were actually building before anyone started doing anything. Developers have a tendency to want to build everything at once and lose the plot, so having a clear MVP definition was as much about keeping the team in scope as it was about having a plan. For me personally it also meant I knew exactly which screens to prototype and did not waste time designing things that were not getting built yet.</p>
+          <p class="week-reflection-body">As a team we needed to get aligned on what we were actually building before anyone started doing anything. As a group we have the tendency to want to build everything at once and lose the plot, so having a clear MVP definition was as much about keeping the team in scope as it was about having a plan. For me personally it also meant I knew exactly which screens to prototype and did not waste time designing things that were not getting built yet.</p>
 
           <p class="week-sub">How</p>
           <p class="week-reflection-body">We defined the MVP together as a team. I made sure to write it down and document it properly so we all had something concrete to refer back to. The core idea was simple, build the smallest version of the platform that proves the main loop works. A visitor logs an observation in the field and that data ends up in a system that staff can act on.</p>
@@ -216,6 +326,49 @@
           <div class="doc-btn-row">
             <a href="MVP Definition.pdf" target="_blank" class="doc-btn">MVP Definition</a>
           </div>
+        </div>
+
+        <div class="doc-content" id="se2-architecture">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Before the team could start building, we needed a clear and documented picture of how the whole system fits together. Adrian took the lead on this as our backend lead with a software engineering background.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">Adrian created the C4 architecture diagrams plus a UML data model. I went through them and asked questions to understand what each one was showing. It was not my work but I wanted to make sure I understood what I was building the frontend on top of.</p>
+
+          <p class="week-sub">What</p>
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/c4-context.png" alt="C4 Context" onclick="openLightbox('img/c4-context.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">C4 Context</span>
+                <p class="doc-img-grid-desc">The big picture. Shows who uses the system and what it connects to. Our three user types, Public Visitor, Sustainability Staff and Humber Admin, all interact with the platform. IoT sensors stream data in and the system connects to Supabase and OpenStreetMap.</p>
+              </div>
+            </div>
+            <div class="doc-img-grid-item">
+              <img src="img/c4-container.png" alt="C4 Container" onclick="openLightbox('img/c4-container.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">C4 Container</span>
+                <p class="doc-img-grid-desc">One level deeper. Shows what the system is made of. Everything runs inside Docker. Inside you have the Web Application in Next.js and a Sensor Ingestion Service for IoT data. Both connect to Supabase and OpenStreetMap.</p>
+              </div>
+            </div>
+            <div class="doc-img-grid-item">
+              <img src="img/c4-component.png" alt="C4 Component" onclick="openLightbox('img/c4-component.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">C4 Component</span>
+                <p class="doc-img-grid-desc">Even deeper. Shows what is inside the Web Application. Page Components, Auth Module, Map Service, API Route Handlers and controllers for observations and health data. This is where my frontend work sits.</p>
+              </div>
+            </div>
+            <div class="doc-img-grid-item">
+              <img src="img/UML.png" alt="UML Data Model" onclick="openLightbox('img/UML.png')" style="width: 40%;">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">UML Data Model</span>
+                <p class="doc-img-grid-desc">Shows how the data is structured. A User can log many Observations. Each Observation belongs to a Zone and has a status of pending, verified or rejected. Users are the people using the platform. Entries are the observations they submit.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">As someone who had never seen diagrams like this before and does not have a background in software, this was new to me like many things in this module. But having it documented this way actually made it easier to understand. I can see the full picture of how the system works, where the data comes from, where it goes, and where my frontend work fits inside all of it. It helped me understand my place in the project.</p>
         </div>
       </div>
     </div>
