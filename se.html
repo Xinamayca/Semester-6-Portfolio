@@ -321,13 +321,25 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item active" onclick="showDoc('se2', 'terra', this)">Terra Design</li>
+          <li class="week-doc-item active" onclick="showDoc('se2', 'myrole', this)">My Role</li>
+          <li class="week-doc-item" onclick="showDoc('se2', 'terra', this)">Terra Design</li>
           <li class="week-doc-item" onclick="showDoc('se2', 'mvp', this)">MVP Definition</li>
           <li class="week-doc-item" onclick="showDoc('se2', 'architecture', this)">Software Architecture</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <div class="doc-content active" id="se2-terra">
+        <div class="doc-content active" id="se2-myrole">
+          <p class="week-sub">My Role</p>
+          <p class="week-reflection-body">Our team divided roles based on skills and background, which honestly made a lot of sense. Mine was Web dev Frontend and Artist.<br><br></p>
+          <p class="week-reflection-body">It meant I was not working on the backend, and honestly that was probably for the best for everyone involved. Before any development started I completely redesigned the Terra app and brand from scratch based on the feedback we received after week 1. The colors, typography, logo, the full design system, that was mine to own and I made sure everything felt like one consistent product going forward.<br><br></p>
+          <p class="week-reflection-body">From there I moved into actually building. I worked heavily on the Staff Dashboard, designing the UI and implementing features using TypeScript. I also worked on the mobile app screens, focusing on the visual layer, the layout, the components, and making sure everything felt modern and on brand.<br><br></p>
+          <p class="week-reflection-body">I worked a lot with AI, Claude specifically, to help me write TypeScript for the dashboard. Claude Code helped a lot with this. What was important for me though was understanding the structure of what I was writing and not just copying and pasting. Since TypeScript is similar to JavaScript which I had only worked with once before, I still needed a lot of guidance. But having that support was great because I really wanted to contribute somewhere beyond just designing. And I did.<br><br></p>
+          <p class="week-reflection-body">My contribution looked different from my teammates because I was not setting up databases or writing backend logic. But the product would not look or feel the way it does without the design and frontend work I put in.</p>
+          <hr class="doc-divider">
+          <img src="img/my_role.png" alt="My Role" class="doc-img" onclick="openLightbox('img/my_role.png')" style="cursor:pointer;">
+        </div>
+
+        <div class="doc-content" id="se2-terra">
           <p class="week-sub">Why</p>
           <p class="week-reflection-body">I made the decision early on to create a separate brand identity rather than tying everything to the Humber Arboretum. The reasoning was simple. If the Humber Office of Sustainability ever wanted to expand the platform to other green spaces in the future, the branding should not limit them to one location. This also came from feedback we received in the previous module. Our teachers pointed out that the app lacked visual cohesion, different screens felt disconnected, like they were not part of the same product. That pushed me to take ownership of the brand and make sure everything from this point forward felt like one consistent system.</p>
 
