@@ -267,6 +267,20 @@
       </div>
       <div class="week-reflection">
         <div class="doc-content active" id="se4-dashboard">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">With the design reference in hand it was time to actually build it. I had never built a map component before and I had never worked with React Leaflet or connected a frontend to a live database. But I wanted to contribute something real to the codebase so I just went for it.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I used Claude to help me write the TypeScript, asked questions when I got stuck and kept iterating until it looked and worked the way I wanted. Because of my experience with HTML, CSS and Java, it was not as foreign as I expected. The structure felt kind of familiar in a way which made it easier to follow along and understand what I was actually writing rather than just copying blindly.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">I built the core map page from scratch. I integrated React Leaflet with OpenStreetMap tiles to render an interactive map in the browser and connected it to our existing backend so the same observation pins from the mobile app would show up on the staff dashboard as well. The ObservationMap component became the main component for the entire dashboard.<br><br></p>
+          <p class="week-reflection-body">The connection to the shared backend works through three key parts. First the dashboard creates a Supabase client using the exact same environment variables the mobile app uses, meaning both frontends are talking to the same database. Second it calls the same SQL functions the mobile app calls to fetch observations, pulling entries by status, approved, pending and declined. Third when a staff member clicks on an entry it fetches the full detail and photos for that specific entry from the same database. One shared backend, two different frontends reading from the same source in real time.<br><br></p>
+          <p class="week-reflection-body">After the initial build I did a full visual redesign. I implemented a glass morphism design system with frosted glass panels and blur effects layered over the live map. I built the left overview panel showing arboretum stats, the right live feed panel showing recent observations in real time, and the review queue overlay where staff can see and manage all pending submissions. The map stays live in the background at all times with the overlays sitting on top of it.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">I came in with zero experience building something like this and within a couple of days I had a working interactive map connected to a live database with a full UI on top of it. It needed refinement but it was mine and it worked. That felt really good.</p>
+          <hr class="doc-divider">
           <img src="img/map_v1.png" alt="Map v1" class="doc-img" onclick="openLightbox('img/map_v1.png')" style="cursor:pointer;">
         </div>
 
@@ -285,6 +299,7 @@
           <hr class="doc-divider">
           <img src="img/claude_design.png" alt="Claude design output" class="doc-img" onclick="openLightbox('img/claude_design.png')" style="cursor:pointer;">
         </div>
+
       </div>
     </div>
   </div>
