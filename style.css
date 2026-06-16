@@ -357,10 +357,12 @@ footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex;
 
   /* Hero */
   .hero-title-row { flex-direction: column; gap: 1rem; }
-  .hero-maps { zoom: 0.5; }
+  .hero-maps { zoom: 0.62; }
   .hero-sticker { position: static; margin-top: .75rem; }
-  .hero-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .hero-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; margin-top: 2rem; }
   .hero-desc { max-width: 100%; }
+  .hero-title { text-align: center; }
+  .hero-eyebrow { font-size: 16px; justify-content: center; }
 
   /* About */
   .about-photo { margin-top: 0; }
@@ -378,7 +380,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex;
 }
 
 @media (max-width: 480px) {
-  .hero-maps { zoom: 0.38; }
+  .hero-maps { zoom: 0.48; }
   .polaroid-grid { gap: 1rem; }
   .module-card { flex-wrap: wrap; }
   .module-card-arrow { margin-left: 0; }
