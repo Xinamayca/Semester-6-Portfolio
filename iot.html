@@ -30,6 +30,7 @@
     </li>
     <li><a href="index.html#conclusion">Conclusion</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <span class="nav-tag">Global Acting in IT · 2026</span>
 </nav>
 
@@ -48,6 +49,7 @@
   <!-- Week navigation -->
   <div class="week-nav reveal">
     <button class="week-tab active" onclick="showWeekIoT(1, this)">Week 1</button>
+    <button class="week-tab" onclick="showWeekIoT(2, this)">Week 2</button>
   </div>
 
   <!-- Week 1 -->
@@ -59,9 +61,41 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('iot1', 'orientation', this)">Orientation and Project Planning</li>
         </ul>
       </div>
       <div class="week-reflection">
+        <div class="doc-content active" id="iot1-orientation">
+          <p class="week-sub">Orientation and Project Planning</p>
+          <p class="week-reflection-body">We started off with an introduction to the department, the university facilities, the academic team, and the local working environment. On the first day we shared our project progress with Dr. Iraklis and listed the components we would need to continue, including temperature, light, soil moisture, and CO2 sensors. Since we were waiting for these to be delivered, we couldn't get hands-on with the project just yet.<br><br>We did have two lectures this week. One was by Professor Rui, introducing how AI and IoT can work together. It covered the fundamentals of Generative AI and how modern language models actually work, from how they're trained to their limitations like hallucinations and outdated knowledge. It was a bit of a surprise topic given that we'll be diving deeper into AI during our time in Canada, but it turned out to be a nice early introduction to the subject. It was also a kind gesture that they flew the professor in from Portugal especially for this.<br><br>With the equipment on its way and some breathing room in the schedule, we also had time to enjoy what Chania had to offer, the beaches, the old town, and the general vibe of the place. A good start to the module.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="week-panel" id="iot-week-2">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 2</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('iot2', 'implementation', this)">Project Implementation and Mentoring</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="iot2-implementation">
+          <p class="week-sub">Project Implementation and Mentoring</p>
+          <p class="week-reflection-body">We kicked off the week with a Scrum lecture from Manolis which was really informative. It also made clear that we hadn't been using Scrum correctly up until this point, and honestly at Fontys we never really got a proper introduction to it either. So this was a valuable reset.<br><br>We also received our hardware from Dr. Iraklis this week. My teammates with more backend knowledge took the lead on getting the sensors connected and functional.<br><br>While they handled the technical setup, I focused on the dashboard design and how to best display the sensor readings we would be receiving. A big part of this was working through the feedback we had collected at the market presentation in Vienna:</p>
+          <ul class="week-list-body">
+            <li>The contrast on the glass bar needed improving as everything was very white and hard to read, particularly in a PowerPoint setting</li>
+            <li>The UI was using three different fonts which made it feel inconsistent and messy, so I simplified this down</li>
+            <li>I added red pin indicators on the map to flag trees or areas that weren't doing well, giving field workers a clear visual cue of where attention was needed</li>
+          </ul>
+          <p class="week-reflection-body">On top of the feedback, I also made a conscious decision to design the dashboard with scalability in mind, so that additional sensors could be added in the future without needing a redesign.<br><br>I created a new page in our product called Software, where I displayed each sensor reading with both an icon and a colour. This was an intentional accessibility decision so that people with colour blindness could still differentiate between sensors without relying on colour alone.<br><br>We also had two other sessions this week that stood out. Professor Petridis ran two workshops that were both genuinely useful and something I think a lot of students underestimate the value of. The first was a presentation skills workshop where we worked on how to communicate and present more effectively. The second was focused on building time management skills, helping us think more intentionally about how we structure and prioritise our work. He was very knowledgeable and there was a lot to take away from both sessions.<br><br>We also had a talk by Assistant Professor George Kakavelakis on turning research projects into real world ventures. He shared his own journey through top electrical engineering programmes in Europe and how he experienced a startup failing firsthand. What made it valuable wasn't the success story but the honesty around it. It was encouraging in the sense that it made the idea of starting your own company feel less scary, while also making clear that you shouldn't be naive about it either. Something I personally took away from it.</p>
+        </div>
       </div>
     </div>
   </div>
