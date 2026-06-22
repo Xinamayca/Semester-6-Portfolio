@@ -185,6 +185,7 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('ai3', 'infra', this)">AI Infrastructure</li>
           <li class="week-doc-item" onclick="showDoc('ai3', 'testing', this)">Project Testing, Feedback &amp; End Users</li>
+          <li class="week-doc-item" onclick="showDoc('ai3', 'finaltouches', this)">Final Touches</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -213,6 +214,57 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
           <img src="img/End_users.png" alt="Testing the product with landscaping students" class="doc-img" onclick="openLightbox('img/End_users.png')" style="cursor:pointer;">
           <p class="week-reflection-body" style="margin-top:1rem;">If you look behind Aidan in the first picture you can spot the tree we used as a demonstration.</p>
           <img src="img/test_tree.png" alt="The tree used for the AI identification demonstration" class="doc-img" onclick="openLightbox('img/test_tree.png')" style="cursor:pointer;">
+        </div>
+        <div class="doc-content" id="ai3-finaltouches">
+          <p class="week-sub">Final Touches</p>
+          <p class="week-reflection-body">Since three of my teammates were already each building an AI feature, AI #1 for the Tree Health Score, AI #2 for Image Classification and AI #3 for Anomaly Detection, I felt that adding a fourth AI would have been overkill. On top of that, we only received the subject for the first time the week before, so to be fair I was not able to implement anything entirely new on the AI side myself.<br><br>Instead, I chose to invest my energy where I could add the most value, which was on the design side, the area I am strongest in coming from my background. I made several small design changes to improve the overall look and feel of the product, and I also implemented some of the feedback we had received from the landscaping students during our testing session. This included practical fixes like adjusting the fonts and colors to improve readability, which were direct points the students had raised.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong style="font-size:17px;">Before</strong></p>
+          <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-top:1rem;">
+            <img src="img/Homepage_Before.png" alt="Homepage before the design changes" class="doc-img" onclick="openLightbox('img/Homepage_Before.png')" style="cursor:pointer; width:68%; margin:0; flex-shrink:0;">
+            <div>
+              <p class="week-reflection-body"><strong>Login page</strong></p>
+              <ul class="week-list-body">
+                <li>Background: a flat forest green</li>
+                <li>Stats: hardcoded numbers</li>
+                <li>Font: Georgia serif with bold weights</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-top:1.5rem;">
+            <img src="img/TreePin_Before.jpg" alt="Dashboard map popup before the design changes" class="doc-img" onclick="openLightbox('img/TreePin_Before.jpg')" style="cursor:pointer; width:68%; margin:0; flex-shrink:0;">
+            <div>
+              <p class="week-reflection-body"><strong>Dashboard</strong></p>
+              <ul class="week-list-body">
+                <li>Map popups have a standard look with a tip arrow and close button</li>
+                <li>Text small and hard to read</li>
+                <li>Colors blending in</li>
+              </ul>
+            </div>
+          </div>
+          <p class="week-reflection-body" style="margin-top:2rem;"><strong style="font-size:17px;">After</strong></p>
+          <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-top:1rem;">
+            <img src="img/Homepage_After.jpg" alt="Homepage after the design changes" class="doc-img" onclick="openLightbox('img/Homepage_After.jpg')" style="cursor:pointer; width:68%; margin:0; flex-shrink:0;">
+            <div>
+              <p class="week-reflection-body"><strong>Login page</strong></p>
+              <ul class="week-list-body">
+                <li>Background: replaced it with an animated gradient that gently shifts between dark greens for a more dynamic, polished feel</li>
+                <li>Stats: made them live by fetching them from the API, so they now reflect real data</li>
+                <li>Font: switched to the cleaner, lighter DM Sans</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-top:1.5rem;">
+            <img src="img/TreePin_After.jpg" alt="Dashboard map popup after the design changes" class="doc-img" onclick="openLightbox('img/TreePin_After.jpg')" style="cursor:pointer; width:68%; margin:0; flex-shrink:0;">
+            <div>
+              <p class="week-reflection-body"><strong>Dashboard</strong></p>
+              <ul class="week-list-body">
+                <li>A custom style with rounded corners and a cleaner card look, removing the tip arrow and close button</li>
+                <li>Made the fonts bigger and more readable</li>
+                <li>Colors not blending in so much anymore</li>
+              </ul>
+            </div>
+          </div>
+          <p class="week-reflection-body" style="margin-top:1.5rem;">For now this is the final touches and design we will deliver as a team. I am happy I could contribute to it by making it more user friendly, while still applying some of the feedback we received the prior day.</p>
         </div>
       </div>
     </div>
