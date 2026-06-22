@@ -51,6 +51,7 @@
     <button class="week-tab active" onclick="showWeekAI(1, this)">Week 1</button>
     <button class="week-tab" onclick="showWeekAI(2, this)">Week 2</button>
     <button class="week-tab" onclick="showWeekAI(3, this)">Week 3</button>
+    <button class="week-tab" onclick="showWeekAI(4, this)">Reflection</button>
   </div>
 
   <!-- Week 1 -->
@@ -183,6 +184,7 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('ai3', 'infra', this)">AI Infrastructure</li>
+          <li class="week-doc-item" onclick="showDoc('ai3', 'testing', this)">Project Testing, Feedback &amp; End Users</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -195,6 +197,43 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
           <div class="doc-btn-row">
             <a href="gpu-lab.pdf" target="_blank" class="doc-btn">GPU Lab</a>
           </div>
+        </div>
+        <div class="doc-content" id="ai3-testing">
+          <p class="week-sub">Project Testing, Feedback &amp; End Users</p>
+          <p class="week-reflection-body">Towards the end of the module we showed our product to landscaping students to get their feedback, since they represented our actual end users. We walked them through our mobile app and dashboard, and Aidan demonstrated how to add a tree, as well as showing off the AI feature he created that can identify a tree.<br><br>The response was mostly positive, which was really encouraging to hear after all the work we had put in. They also gave us some thoughtful suggestions for features that would be nice to have. These included:</p>
+          <ul class="week-list-body">
+            <li>The ability for a visitor to report something wrong without it being an existing entry, and have it show up on the map</li>
+            <li>A set of guidelines on the home page, like "pick up your trash" and "don't pick flowers"</li>
+            <li>A filtering option to see if a plant appears in different areas</li>
+            <li>Slightly bigger fonts and improved colors for readability</li>
+            <li>Labels for each entry, such as "invasive" or "rare," along with the ability to create new labels</li>
+            <li>Adding stress test data to demonstrate that our application can handle a heavy load during the final presentation</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">Unfortunately, with only two days left, we were not able to implement some of these. Even so, it was really valuable to hear directly from the people who would actually use the product, and these suggestions are something that could easily be picked up and built on by future students carrying the project forward.</p>
+          <img src="img/End_users.png" alt="Testing the product with landscaping students" class="doc-img" onclick="openLightbox('img/End_users.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">If you look behind Aidan in the first picture you can spot the tree we used as a demonstration.</p>
+          <img src="img/test_tree.png" alt="The tree used for the AI identification demonstration" class="doc-img" onclick="openLightbox('img/test_tree.png')" style="cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="week-panel" id="ai-week-4">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Reflection</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('ai4', 'reflection', this)">Personal Reflection</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="ai4-reflection">
+          <p class="week-sub">Personal Reflection</p>
+          <p class="week-reflection-body">Overall, I had a great experience in Toronto, at Humber, and during this project. I remember at the start I did not even know what an arboretum was, and here I actually got to experience one for myself.<br><br>I also remember my first reaction to the project being something like "ew, a project about the health of trees, I know nothing about trees." But after being here and seeing how much people care about their trees, my whole perspective shifted. It was genuinely inspiring. I love that people love their trees so much that there is an entire field of study dedicated to landscaping and caring for them. It completely changed the way I think about it, and I take back my initial judgment.<br><br>It was not only the trees, but the history of the land in general. It was very educational to learn about the colonization that happened on this land and how it still affects it to this day, like the highways being a danger for turtles or the health of the river possibly declining because of pollution. These are all things that came with colonialism in the past, and it was eye opening to see how that history is still connected to the environment now, as well as how deeply it affected the original people of this land.<br><br>As for the IT topics, my goal in each module has always been to take away something new that I could apply in my later studies. I think I learned more in this module than in all the previous ones, thanks to the great structure and all the professors involved. Some of the main things I took away were the different types of machine learning, how to prepare data, and how to test AI models. I also learned just how expensive and costly it is to run these big models, and that there really should be governance soon around how AI is used. Coming from knowing basically nothing about AI, I now feel like I have a solid foundation to build upon, and more importantly, one that I am genuinely interested in building upon. AI is such an upcoming field, and it is in our hands to control how it continues to grow. This module really caught my interest, and AI is definitely something I would like to study further.</p>
         </div>
       </div>
     </div>
