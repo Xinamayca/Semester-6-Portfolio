@@ -50,6 +50,7 @@
   <div class="week-nav reveal">
     <button class="week-tab active" onclick="showWeekAI(1, this)">Week 1</button>
     <button class="week-tab" onclick="showWeekAI(2, this)">Week 2</button>
+    <button class="week-tab" onclick="showWeekAI(3, this)">Week 3</button>
   </div>
 
   <!-- Week 1 -->
@@ -140,6 +141,8 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('ai2', 'humber', this)">Exploring in the Humber River</li>
           <li class="week-doc-item" onclick="showDoc('ai2', 'speaker', this)">Guest Speaker</li>
+          <li class="week-doc-item" onclick="showDoc('ai2', 'vision', this)">Computer Vision</li>
+          <li class="week-doc-item" onclick="showDoc('ai2', 'agents', this)">Creating AI Agents</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -152,6 +155,40 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
           <p class="week-sub">Machine Learning for Environmental Research</p>
           <p class="week-reflection-body">We had the opportunity to hear from a guest speaker, Heinz, who shared how he and his team applied machine learning to an ongoing research project in an area that, according to the people living there, was contaminated.<br><br>The challenge was that even though the community was certain something was wrong, the contamination itself was incredibly hard to locate. It had been there for a long time, caused by an old dump site, but the contaminated area underground kept shifting and moving over time. This made it almost impossible to pin down exactly where it was or what it consisted of. The main reason people knew something was wrong was because of the human cost: high rates of sickness, cancer and other health problems in the area.<br><br>The people had a lot of data, but no way to actually visualize it, since the contamination was always moving and changing. This is where machine learning came in. Heinz and his team have been working on this research for five years, and they were finally able to visualize the contamination and deliver the results to the community.<br><br>Unfortunately, the project is still ongoing. Even with the contamination now mapped out, they are still unsure of what solution to bring, and finding one will probably take years. But thanks to machine learning, that process could be a lot faster than it would have been otherwise.<br><br>Overall it was a really interesting topic. What stood out to me most was the human side of it. These people know the area they live in is slowly killing them, but they cannot do much about it, since they live there and moving away would be far too expensive. It was also great to see how many people are involved in projects like these, coming together to help a community that reached out to them. Seeing AI being used for something that genuinely helps people was really nice to witness, and a good reminder of what this technology can be used for.</p>
           <img src="img/guest.jpeg" alt="Guest speaker session" class="doc-img" onclick="openLightbox('img/guest.jpeg')" style="cursor:pointer;">
+        </div>
+        <div class="doc-content" id="ai2-vision">
+          <p class="week-sub">Computer Vision</p>
+          <p class="week-reflection-body">This lecture introduced us to computer vision, the field focused on getting computers to extract meaning from images and video, the way our eyes and brain do automatically. That "meaning" can be a label like "this is a cat," a location like where the cat is in the frame, or even a full description of the scene. The thing that stuck with me was the core challenge: to a computer, an image is not actually a picture, it is just a grid of numbers. The whole field is essentially about turning that grid of numbers into something useful.<br><br>I will be honest, this was a very difficult subject and the hardest topic for me to grasp out of everything we covered during the module. What helped was seeing how it connected back to the data engineering we had learned with Professor Parisa, since an image is really just numbers in a different shape, and preparing images follows a similar load, inspect and clean routine before a model ever sees them.<br><br>We then looked at the core tasks in computer vision, roughly in order of difficulty. Classification answers "what is in this image?" with a single label for the whole picture. Object detection answers "what is in this image, and where?" by drawing bounding boxes around each object. Segmentation goes even further, labeling every single pixel as belonging to an object or not, outlining the exact shape rather than just a box. More specialized tasks like face recognition and pose estimation are versions of these.<br><br>We also touched on convolutional neural networks, or CNNs, which are what allow models to actually "see" by scanning an image in small pieces to pick out patterns. I will admit this part was pretty confusing for me and is something I would need more time to fully understand.<br><br>To put the theory into practice, we worked through a hands-on lab with Professor Weijing Ma using OpenCV and MediaPipe. We started with basic image manipulation, getting comfortable with the idea that an image really is just an array we can slice and change. We then moved on to color detection, where I learned why a color space like RGB is not always the best choice for isolating a specific color and how switching to a different color space makes the task much easier. The final part was pose detection using MediaPipe, which can identify 33 different body landmarks like shoulders, elbows and knees from a video feed in real time.<br><br>I did not get enough time to fully finish the lab exercise, but it was really nice to see what computer vision is already being used for in day to day life, like workout apps that track your form or self driving cars. I always wondered why it was so hard for AI to classify or generate images, and after this lecture I finally understood why. It is just so complicated, lol.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="GlobalIT_ComputerVision.html" target="_blank" class="doc-btn">Computer Vision Lab</a>
+          </div>
+        </div>
+        <div class="doc-content" id="ai2-agents">
+          <p class="week-sub">Creating AI Agents</p>
+          <p class="week-reflection-body">In this part of the module we explored how to build AI agents using n8n, a workflow automation tool that lets you connect different apps and APIs together without having to code everything from scratch.<br><br>We learned how to connect APIs from different services and chain them together into automated workflows. For example, we built agents that could pull the latest stock news, and others that could send emails to ourselves automatically. It was eye opening to see how you can stitch together different tools and let an agent handle a task from start to finish on its own.<br><br>What I took away from this was a much better understanding of what people actually mean when they talk about "AI agents." Rather than a single model doing one thing, it is about connecting multiple services and letting them work together to complete a goal, like gathering information and then acting on it.<br><br>Unfortunately I am not able to show my workflow here, as my n8n subscription has since run out and I can no longer log in to access it. But the concepts I learned about connecting APIs and automating tasks with agents are something I would definitely like to explore more in the future.</p>
+          <img src="img/agent_email.png" alt="n8n AI agent email workflow" class="doc-img" onclick="openLightbox('img/agent_email.png')" style="cursor:pointer;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week-panel" id="ai-week-3">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 3</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('ai3', 'infra', this)">AI Infrastructure</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="ai3-infra">
+          <p class="week-sub">AI Infrastructure &amp; Responsible AI</p>
+          <p class="week-reflection-body">This lecture focused on the physical backbone that makes modern AI possible and the principles that should guide how it is used. We learned how AI infrastructure differs from traditional IT, shifting from CPUs to GPUs and TPUs, running massively in parallel and needing far more power and cooling.<br><br>We covered the three things that drive AI: compute, data and algorithms, and how AI can be pictured as an iceberg, where users only see the apps at the top while the models, hardware and data centers stay hidden underneath. On the technical side we looked at why GPUs are so important for AI, since the math behind it is highly parallel, and I was surprised to learn that memory is actually the biggest bottleneck in AI hardware. This is also a big reason why GPUs are so expensive these days, since the demand for them in AI is huge.<br><br>The second half shifted from "can we build it" to "should we, and how." We learned the difference between ethical AI (the broad principles like fairness and privacy) and responsible AI (actually putting those into practice through transparency, accountability and compliance), and looked at the environmental cost of AI, from its huge energy use to the water needed to cool data centers.<br><br>What stuck with me most is that AI is not just clever algorithms. It sits on top of an enormous, expensive and energy hungry physical foundation, and that scale is exactly what makes responsibility and sustainability so important.</p>
         </div>
       </div>
     </div>
