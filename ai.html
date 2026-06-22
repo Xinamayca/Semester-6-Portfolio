@@ -46,31 +46,110 @@
   <div class="divider"></div>
   <br>
 
-  <div class="module-content reveal">
-    <div class="module-block">
-      <p class="module-block-label">✦ About this module</p>
-      <h2 class="module-block-title">Overview</h2>
-      <p class="module-block-body">
-        Artificial Intelligence is the final module of the minor, taking place in Toronto, Canada.
-        This module explores machine learning, ethical AI, and how intelligent systems are shaping
-        the future of technology and society.
-      </p>
-    </div>
+  <!-- Week navigation -->
+  <div class="week-nav reveal">
+    <button class="week-tab active" onclick="showWeekAI(1, this)">Week 1</button>
+    <button class="week-tab" onclick="showWeekAI(2, this)">Week 2</button>
+  </div>
 
-    <div class="module-block">
-      <p class="module-block-label">✦ Learning outcomes</p>
-      <h2 class="module-block-title">What I'll be working on</h2>
-      <p class="module-block-body">
-        Understanding AI fundamentals, working with models and datasets, and critically engaging
-        with the ethical and societal implications of building intelligent systems in a global context.
-      </p>
+  <!-- Week 1 -->
+  <div class="week-panel active" id="ai-week-1">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 1</h2>
     </div>
-
-    <div class="module-coming-soon">
-      <p class="cs-label">Content coming soon ✦</p>
-      <p class="cs-sub">This module begins May 2026 — check back then</p>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('ai1', 'turtle', this)">Turtle Walk</li>
+          <li class="week-doc-item" onclick="showDoc('ai1', 'ml', this)">Introduction to AI & Machine Learning</li>
+          <li class="week-doc-item" onclick="showDoc('ai1', 'mldl', this)">Machine Learning and Deep Learning</li>
+          <li class="week-doc-item" onclick="showDoc('ai1', 'dataeng', this)">Data Engineering for AI</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="ai1-turtle">
+          <p class="week-sub">Turtle Walk</p>
+          <p class="week-reflection-body">We kicked off the module at the Lakeshore Campus where we presented our progress to stakeholders. Afterwards, Jen introduced us to Indigenous history and invited Carolynne, an Indigenous knowledge keeper and member of the Turtle Clan, to take us on a walk of the land.<br><br>Meeting an actual snapping turtle during the walk made the experience unforgettable. For Carolynne, protecting turtles is not just a cultural value, it is tied to her identity as a member of the Turtle Clan. In many Anishinaabe and Haudenosaunee traditions, your clan defines your role in the community and your relationship with that animal. She also took this turtle after the walk.<br><br>This introduced me to the concept of "All Our Relations", a core Indigenous philosophy that sees everything as connected: humans, animals, plants, water, land and the spiritual world are all part of one living web. The walk was not a nature tour, it was a lesson in seeing the land as a living relative, not a resource.<br><br>We also learned about Terra Nullius, the legal doctrine colonizers used to declare Indigenous lands empty and ownerless, justifying the seizure of land and the erasure of cultures. Coming from Aruba, a place that was also colonized, this resonated with me. It is something that is rooted in my own history too.<br><br>Both concepts reminded me that as future IT professionals, we have a responsibility to build things that do not repeat those same patterns of erasure and exclusion.</p>
+          <img src="img/Turtle walk.png" alt="Turtle Walk" class="doc-img" onclick="openLightbox('img/Turtle walk.png')" style="cursor:pointer;">
+        </div>
+        <div class="doc-content" id="ai1-ml">
+          <p class="week-sub">Introduction to AI & Machine Learning</p>
+          <p class="week-reflection-body">Our second day was dedicated to an introduction to Artificial Intelligence, Machine Learning and Deep Learning, led by Dr. Ibrahim Tamim.<br><br>The lecture started by contextualizing AI in everyday life, from healthcare and self-driving cars to finance, cybersecurity and even video games. What struck me was how present AI already is in things we don't really pay attention to.<br><br>We also explored the origins of AI, going back to the Dartmouth workshop in 1956 where the term "artificial intelligence" was first coined, and even earlier to Alan Turing's foundational question: "Can machines think?" We also learned about the evolution of processing power and data transfer speeds, which helped me understand why AI has only really exploded in recent years despite the ideas being much older.<br><br>From there we dove into the three layers: AI as the broad field, Machine Learning as a subset that learns from data, and Deep Learning as a further subset using neural networks. The distinction between supervised, unsupervised and reinforcement learning was also covered.<br><br>What I particularly appreciated was how Ibrahim delivered the content. Coming from a background in design with no prior technical knowledge of AI, I was a little nervous going in. But he explained everything in a way that was genuinely easy to follow. He kept it interesting throughout the entire lecture, never losing my attention, which is not always easy with such a dense topic.</p>
+          <p class="week-sub">Side Quest</p>
+          <p class="week-reflection-body">Later that day we stepped away from the classroom for an outdoor exploration with Jen and Lynn River. We went on a nature walk where we learned about the trees, local animals and the lake surrounding us. We spotted squirrels, birds and a turtle again, which after learning about Carolynne and the Turtle Clan the day before, felt a little more meaningful. It was a nice balance to the more technical parts of the day and a good opportunity to connect with the environment and with each other outside of a classroom setting.</p>
+          <img src="img/Nature_Walk.png" alt="Nature Walk" class="doc-img" onclick="openLightbox('img/Nature_Walk.png')" style="cursor:pointer;">
+        </div>
+        <div class="doc-content" id="ai1-dataeng">
+          <p class="week-sub">Data Engineering for AI</p>
+          <p class="week-reflection-body">On the last day of the week we had a lecture on data engineering for AI, led by Professor Parisa. This session was all about learning how to actually prepare and manipulate datasets before feeding them into a machine learning model, which is one of the most important steps in the whole AI pipeline.<br><br>We worked with Pandas, a Python library built for data manipulation. We started with the two core structures: a Series, which is essentially a labeled one dimensional array, and a DataFrame, which is a two dimensional table with named rows and columns. Most real world datasets come in the form of a DataFrame.<br><br>The main thing Professor Parisa wanted us to internalize was that preparing a dataset follows a repeatable workflow. The same set of steps every time a new file lands on your desk, before you ever feed it to a model. It is basically a "load it, look at it, clean it" loop:</p>
+          <ol class="doc-steps">
+            <li>Load the data. Always start by reading the file in, telling Pandas that the first row holds the column names rather than data, and assigning it to a variable (usually df).
+              <pre class="doc-code">df = pd.read_csv("mtcars.csv", header=0)</pre>
+            </li>
+            <li>Inspect it. Before touching anything, get a feel for what you are holding. This is the "look before you leap" step, making sure nothing came in broken.
+              <pre class="doc-code">df.head()      # first 5 rows
+df.shape       # (rows, columns)
+df.dtypes      # data type of each column
+df.columns     # column names</pre>
+            </li>
+            <li>Handle missing data. Real datasets almost always have holes (NaN values). First you find where they are, then you decide whether to drop the incomplete rows or fill them in, either with a constant, a per column value, or something smarter like the column average.
+              <pre class="doc-code">df.isnull()              # map of where the NaNs are
+df.dropna()              # remove rows with missing values
+df.fillna(df.mean())     # fill NaNs with the column average</pre>
+            </li>
+            <li>Select and reshape. Now you shape the data into what you actually need, selecting specific rows and columns by label, renaming columns, dropping the ones you do not want, and creating new derived columns.
+              <pre class="doc-code">df.loc[1:5, "disp":"wt"]              # select rows/columns by label
+df.rename(columns={"old": "new"})     # rename columns
+df.drop("col", axis=1)                # drop a column
+df["new_col"] = df["col"] / 2         # create a derived column</pre>
+            </li>
+            <li>Sort and combine. Finally, you order the data and, if it came in separate pieces, stitch the multiple tables together.
+              <pre class="doc-code">df.sort_values(by=["col"])            # sort the data
+pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
+            </li>
+          </ol>
+          <p class="week-reflection-body">The key idea was that this process is the same five moves every single time, which made it feel a lot less intimidating. Instead of seeing data preparation as a messy, unpredictable task, I started to see it as a clear routine you can rely on.<br><br>It was a very practical session and felt like a natural continuation of everything we had been learning throughout the week. By the end I had a much clearer idea of what it actually takes to get data ready for AI.<br><br>I also added color to the tables in my file to understand the distinction better (still a UX student lol).</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="data_engineering.html" target="_blank" class="doc-btn">Salaries dataset</a>
+          </div>
+        </div>
+        <div class="doc-content" id="ai1-mldl">
+          <p class="week-sub">Machine Learning and Deep Learning</p>
+          <p class="week-reflection-body">We further deepened our understanding of Machine Learning with a second session led by Ibrahim. This time the focus was on data and the different types of ML.<br><br>We started by understanding what data actually is and how central it is to everything in AI. Without good data there is no good model. We looked at the difference between structured data, unstructured data and semi-structured data, and learned how to read a dataset, identifying variables, rows, dependent and independent variables, and categorical versus numerical types.<br><br>From there we went deeper into the three categories of Machine Learning: supervised learning, unsupervised learning and reinforcement learning. The one that stood out most to me was supervised learning, where the model learns from labeled data to make predictions. We saw real world examples like disease diagnosis, loan approval, house price prediction and sentiment analysis, which made it much easier to understand how these models actually get used in practice.<br><br>Alongside the theory we also completed Lab 1 and practiced linear regression using a salary dataset that was provided to us. During this part I mainly followed along with Ibrahim, focusing on understanding the basics rather than diving too deep into the code. So far everything was understandable and I felt like I was building a solid foundation. The next day we would go further and get more hands on practice with preparing datasets for use in AI.</p>
+          <hr class="doc-divider">
+          <div class="doc-btn-row">
+            <a href="Lab_1_Exercises.pdf" target="_blank" class="doc-btn">Lab 1 Exercises</a>
+            <a href="Lab_1.html" target="_blank" class="doc-btn">Lab 1 Results</a>
+            <a href="Salary_Ibrahim.html" target="_blank" class="doc-btn">Salary Lab Exercise</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Week 2 -->
+  <div class="week-panel" id="ai-week-2">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 2</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('ai2', 'humber', this)">Exploring in the Humber River</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="ai2-humber">
+          <p class="week-sub">Exploring in the Humber River</p>
+          <p class="week-reflection-body">So on a bright and early Monday morning we had the lovely opportunity to go INSIDE of the Humber River. Now many of my classmates did not want to, but I WAS EXCITED!<br><br>We got to wear these funny minion looking costumes and basically we had to collect tiny critters in the river and distinguish them to see if the river is healthy. It turns out the little creatures living in the water can tell you a lot about how healthy the river is, so finding certain ones can be a good sign, and finding many of others can mean a bad sign. I forgot all the names for these creatures, but we were helping them collect data for the river, so Jen and Mike were very grateful for our participation.<br><br>It was such a fun experience and a nice change from sitting in the classroom.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <footer>
@@ -81,6 +160,32 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+function showWeekAI(num, btn) {
+  document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.week-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('ai-week-' + num).classList.add('active');
+  btn.classList.add('active');
+}
+function showDoc(week, doc, item) {
+  const panel = item.closest('.week-panel');
+  panel.querySelectorAll('.week-doc-item').forEach(i => i.classList.remove('active'));
+  panel.querySelectorAll('.doc-content').forEach(d => d.classList.remove('active'));
+  item.classList.add('active');
+  document.getElementById(week + '-' + doc).classList.add('active');
+}
+</script>
 <script src="script.js"></script>
 </body>
 </html>

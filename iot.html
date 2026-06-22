@@ -50,6 +50,7 @@
   <div class="week-nav reveal">
     <button class="week-tab active" onclick="showWeekIoT(1, this)">Week 1</button>
     <button class="week-tab" onclick="showWeekIoT(2, this)">Week 2</button>
+    <button class="week-tab" onclick="showWeekIoT(3, this)">Week 3</button>
   </div>
 
   <!-- Week 1 -->
@@ -83,9 +84,26 @@
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('iot2', 'implementation', this)">Project Implementation and Mentoring</li>
+          <li class="week-doc-item" onclick="showDoc('iot2', 'dashboard', this)">Sensor Dashboard</li>
         </ul>
       </div>
       <div class="week-reflection">
+        <div class="doc-content" id="iot2-dashboard">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Our sensors were collecting valuable data but the way it was being displayed wasn't doing it justice. The initial version used a pop up layout with a left side bar that was cluttered, hard to read, and visually inconsistent. Timestamps were too small, colours were blending into each other, and the overall design didn't give field workers a clear or quick understanding of what was happening with their trees. On top of that, the Vienna market feedback made it clear that readability and clarity needed to be a priority.</p>
+          <p class="week-sub" style="color: var(--black); font-weight: 400;">Version One</p>
+          <img src="img/V1_Sensors.png" alt="Version One Sensor Dashboard" class="doc-img" onclick="openLightbox('img/V1_Sensors.png')" style="cursor:pointer;">
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I went through several iterations to get this right. I focused on making colours more distinct and pairing each sensor with a recognisable icon so users could differentiate readings without relying on colour alone, an important accessibility consideration. I improved the graph readability by making numbers clearly visible and added filters so users could toggle between sensors. I also removed the ecology tab as it only contained mock data and was adding noise rather than value. Towards the end my teammate integrated a tree health score tab, and together we made sure it was properly incorporated into the final design.</p>
+          <p class="week-sub" style="color: var(--black); font-weight: 400;">Version Two</p>
+          <img src="img/V2_Sensors.png" alt="Version Two Sensor Dashboard" class="doc-img" onclick="openLightbox('img/V2_Sensors.png')" style="cursor:pointer;">
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">The final sensor dashboard is a clean, readable, and accessible page that displays real time readings from the temperature, light, and soil moisture sensors. Each sensor has its own icon and colour, the graph is easy to read, and the tree health score, calculated by an AI model, gives users an at a glance overview of how their trees are doing. The dashboard is also built with scalability in mind, ready to accommodate additional sensors as the system grows.</p>
+          <p class="week-sub" style="color: var(--black); font-weight: 400;">Final Version</p>
+          <img src="img/Final_Sensors.png" alt="Final Sensor Dashboard" class="doc-img" onclick="openLightbox('img/Final_Sensors.png')" style="cursor:pointer;">
+          <p class="week-sub">So</p>
+          <p class="week-reflection-body">Going from version one to the final version is night and day. What started as a cluttered and hard to read pop up has turned into an intuitive dashboard that field workers can actually use. It is scalable, accessible, and built to grow with the product.</p>
+        </div>
         <div class="doc-content active" id="iot2-implementation">
           <p class="week-sub">Project Implementation and Mentoring</p>
           <p class="week-reflection-body">We kicked off the week with a Scrum lecture from Manolis which was really informative. It also made clear that we hadn't been using Scrum correctly up until this point, and honestly at Fontys we never really got a proper introduction to it either. So this was a valuable reset.<br><br>We also received our hardware from Dr. Iraklis this week. My teammates with more backend knowledge took the lead on getting the sensors connected and functional.<br><br>While they handled the technical setup, I focused on the dashboard design and how to best display the sensor readings we would be receiving. A big part of this was working through the feedback we had collected at the market presentation in Vienna:</p>
@@ -95,6 +113,27 @@
             <li>I added red pin indicators on the map to flag trees or areas that weren't doing well, giving field workers a clear visual cue of where attention was needed</li>
           </ul>
           <p class="week-reflection-body">On top of the feedback, I also made a conscious decision to design the dashboard with scalability in mind, so that additional sensors could be added in the future without needing a redesign.<br><br>I created a new page in our product called Software, where I displayed each sensor reading with both an icon and a colour. This was an intentional accessibility decision so that people with colour blindness could still differentiate between sensors without relying on colour alone.<br><br>We also had two other sessions this week that stood out. Professor Petridis ran two workshops that were both genuinely useful. The first was a presentation skills workshop where we worked on how to communicate and present more effectively. The second was focused on building time management skills, helping us think more intentionally about how we structure and prioritise our work. He was very knowledgeable and there was a lot to take away from both sessions.<br><br>We also had a talk by Assistant Professor George Kakavelakis on turning research projects into real world ventures. He shared his own journey through top electrical engineering programmes in Europe and how he experienced a startup firsthand. What made it valuable wasn't the success story but the honesty around it. It was encouraging in the sense that it made the idea of starting your own company feel less scary, while also making clear that you shouldn't be naive about it either.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week-panel" id="iot-week-3">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Week 3</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('iot3', 'finalization', this)">Finalization and Presentation</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="iot3-finalization">
+          <p class="week-sub">Finalization and Presentation</p>
+          <p class="week-reflection-body">This week was short by design. With most of the group flying out on Thursday, we only had three working days to wrap everything up. By this point the project was largely finished, my teammates had the sensors fully working and the dashboard was in its final state.<br><br>On Wednesday we had our final IoT presentation where each team presented their technical approach, the components they worked with, and the real world impact of their solution. I contributed to the presentation alongside my team. It was a good moment to reflect on how far the project had come from week one when we were still waiting for our hardware to arrive.<br><br>After the presentation we had a group dinner to close out the experience, which was a nice way to end the module together.<br><br>Unfortunately the original PowerPoint has since been edited so I can't show the exact version we presented, but the pictures below capture our time in Greece better than any slide could.</p>
         </div>
       </div>
     </div>

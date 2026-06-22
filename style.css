@@ -255,6 +255,9 @@ section { padding: 5rem 3rem; position: relative; }
 .doc-content.active { display: block; padding: 1.5rem 2rem; }
 .week-reflection-label { font-family: 'Caveat', cursive; font-size: 15px; color: var(--blue); margin-bottom: .75rem; }
 .week-reflection-body { font-size: 14px; color: #555; line-height: 1.85; }
+.doc-steps { font-size: 14px; color: #555; line-height: 1.85; padding-left: 1.25rem; margin: 1rem 0; display: flex; flex-direction: column; gap: 1rem; }
+.doc-steps > li { padding-left: .25rem; }
+.doc-code { font-family: 'Menlo', 'Consolas', 'DejaVu Sans Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #111; background: var(--blue-light); border: 1px solid var(--border); border-radius: 4px; padding: .85rem 1rem; margin: .65rem 0 0; overflow-x: auto; white-space: pre; }
 
 @media(max-width:768px){
   .week-panel-body { grid-template-columns: 1fr; }
