@@ -185,6 +185,7 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('ai3', 'infra', this)">AI Infrastructure</li>
           <li class="week-doc-item" onclick="showDoc('ai3', 'testing', this)">Project Testing, Feedback &amp; End Users</li>
+          <li class="week-doc-item" onclick="showDoc('ai3', 'dnn', this)">Deep Neural Network (DNN)</li>
           <li class="week-doc-item" onclick="showDoc('ai3', 'finaltouches', this)">Final Touches</li>
         </ul>
       </div>
@@ -214,6 +215,60 @@ pd.concat([df1, df2], axis=0)         # stack tables top to bottom</pre>
           <img src="img/End_users.png" alt="Testing the product with landscaping students" class="doc-img" onclick="openLightbox('img/End_users.png')" style="cursor:pointer;">
           <p class="week-reflection-body" style="margin-top:1rem;">If you look behind Aidan in the first picture you can spot the tree we used as a demonstration.</p>
           <img src="img/test_tree.png" alt="The tree used for the AI identification demonstration" class="doc-img" onclick="openLightbox('img/test_tree.png')" style="cursor:pointer;">
+        </div>
+        <div class="doc-content" id="ai3-dnn">
+          <p class="week-sub">Deep Neural Network (DNN) Lab</p>
+          <p class="week-reflection-body">In this lab we used TensorFlow and Keras in Google Colab to build a neural network that predicts a car's fuel efficiency, its MPG (miles per gallon), based on features like cylinders, horsepower, weight and acceleration.</p>
+          <p class="doc-subhead">Data Preparation</p>
+          <p class="week-reflection-body">We loaded the <span class="code-inline">mpg.csv</span> dataset and followed the standard cleaning process: checking for missing values (6 were found in the Horsepower column), dropping those rows, and encoding the <span class="code-inline">Origin</span> column. Since <span class="code-inline">Origin</span> was stored as numbers (1, 2, 3), we mapped them to country labels (USA, Europe, Japan) then used <span class="code-inline">pd.get_dummies()</span> to one-hot encode them into three separate columns the model could read. We then split the data 80/20 into training and test sets, separated the features from the target label (<span class="code-inline">MPG</span>), and normalized the inputs using Keras's <span class="code-inline">Normalization</span> layer.</p>
+          <pre class="doc-code">dataset['Origin'] = dataset['Origin'].map({1: 'USA', 2: 'Europe', 3: 'Japan'})
+dataset = pd.get_dummies(dataset, columns=['Origin'])</pre>
+          <p class="doc-subhead">Example 1 — My Model (2 neurons per layer)</p>
+          <p class="week-reflection-body">The first model was my own attempt, using two hidden layers with only 2 neurons each. With just 29 trainable parameters, this network had very limited capacity to learn patterns in the data.</p>
+          <pre class="doc-code">def build_and_compile(norm):
+    model = keras.Sequential([
+        norm,
+        layers.Dense(2, activation='relu'),
+        layers.Dense(2, activation='relu'),
+        layers.Dense(1)
+    ])
+    model.compile(loss='mean_absolute_error',
+                  optimizer=tf.keras.optimizers.Adam(0.001))
+    return model</pre>
+          <p class="doc-result">Result: MAE = 3.54 MPG</p>
+          <p class="week-reflection-body">Looking at the loss curve, the model was still learning at epoch 100 and had not fully settled, which told me 2 neurons per layer just was not enough capacity for this task. I will be honest, I also made a few rookie mistakes along the way — like calling <span class="code-inline">summary()</span> before training and accidentally running <span class="code-inline">fit()</span> twice — which messed up my earlier results. Once I cleaned those up it ran properly.</p>
+          <div class="doc-btn-row">
+            <a href="DNN-Xina.pdf" target="_blank" class="doc-btn">My Model Lab</a>
+          </div>
+          <p class="doc-subhead">Example 2 — Instructor's Model (128 neurons per layer)</p>
+          <p class="week-reflection-body">The second model was the instructor's version. It kept the same two hidden layer structure but bumped each layer up to 128 neurons, giving it significantly more capacity to find patterns in the data.</p>
+          <pre class="doc-code">def build_and_compile(norm):
+    model = keras.Sequential([
+        norm,
+        layers.Dense(128, activation='relu'),
+        layers.Dense(128, activation='relu'),
+        layers.Dense(1)
+    ])
+    model.compile(loss='mean_absolute_error',
+                  optimizer=tf.keras.optimizers.Adam(0.01))
+    return model</pre>
+          <p class="doc-result">Result: MAE = 1.77 MPG</p>
+          <p class="week-reflection-body">This time the loss curve dropped sharply and leveled off cleanly, meaning the model learned well and generalized without overfitting.</p>
+          <div class="doc-btn-row">
+            <a href="DNN-Ibrahim.pdf" target="_blank" class="doc-btn">Instructor's Model Lab</a>
+          </div>
+          <p class="doc-subhead">Comparison</p>
+          <table class="doc-table">
+            <thead>
+              <tr><th>Model</th><th>Neurons per Layer</th><th>Trainable Params</th><th>MAE</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>My Model</td><td>2</td><td>29</td><td>3.54 MPG</td></tr>
+              <tr><td>Instructor's Model</td><td>128</td><td>17,921</td><td>1.77 MPG</td></tr>
+            </tbody>
+          </table>
+          <p class="doc-subhead">Takeaway</p>
+          <p class="week-reflection-body">Both models used the same architecture and the same data, but the results were pretty different. The instructor's larger network cut the error roughly in half compared to mine. My smaller model was not completely useless — it did learn something — but it hit its ceiling fast. This lab made it click for me that the capacity of a network matters just as much as its depth, and that even a small change like the number of neurons can make a big difference in how well it performs.</p>
         </div>
         <div class="doc-content" id="ai3-finaltouches">
           <p class="week-sub">Final Touches</p>
