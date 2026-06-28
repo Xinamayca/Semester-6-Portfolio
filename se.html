@@ -144,12 +144,80 @@
       <div class="week-docs">
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
-          <li class="week-doc-item active" onclick="showDoc('se3', 'setup', this)">Setup and First Commits</li>
+          <li class="week-doc-item active" onclick="showDoc('se3', 'brand', this)">Brand Assets</li>
+          <li class="week-doc-item" onclick="showDoc('se3', 'mobile', this)">Mobile</li>
+          <li class="week-doc-item" onclick="showDoc('se3', 'setup', this)">Setup and First Commits</li>
           <li class="week-doc-item" onclick="showDoc('se3', 'orm', this)">ORM – Object Relational Mapping</li>
         </ul>
       </div>
       <div class="week-reflection">
-        <div class="doc-content active" id="se3-setup">
+        <div class="doc-content active" id="se3-brand">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Before anyone could build anything that looked like Terra, the assets needed to exist in the codebase. Without them every teammate would be working from different versions of the logo or recreating things from scratch.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I first created the logos in Adobe Illustrator and then exported them as both PNG and SVG to keep them clean and scalable at any size <em>(Still a designer)</em>. I then added them directly to the shared UI package so they could be imported by any part of the project, the mobile app, the web dashboard and anything built on top of it in the future.</p>
+          <img src="img/adobe_logo.png" alt="Adobe Illustrator" onclick="openLightbox('img/adobe_logo.png')" style="width: 460px; max-width: 100%; margin-top: 1rem; cursor: pointer; display: block;">
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">What I added to <span class="code-inline">packages/ui/assets/</span>:</p>
+          <ul class="week-list-body">
+            <li>Icon in dark and light variants, in both SVG and PNG</li>
+            <li>Logo and wordmark in dark and light variants, in both SVG and PNG</li>
+            <li>Leaf icon in both SVG and PNG</li>
+          </ul>
+          <img src="img/brand_assets.png" alt="Terra brand assets" class="doc-img" onclick="openLightbox('img/brand_assets.png')" style="cursor:pointer;">
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Having these in the shared package meant my teammates could just import them directly wherever they needed them. It made the project feel like a real app from the start, something with an actual identity rather than just a collection of screens, and gave everyone a consistent visual foundation to build from cohesively.</p>
+        </div>
+
+        <div class="doc-content" id="se3-mobile">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Since I designed the mobile screen I wanted to start by actually contributing something to it in code. Starting with the navigation bar felt like the right first step. It was also my way of getting back into working with Git in a team setting since I had only done it once before almost two years ago. Creating a feature branch, making commits and pushing without breaking my teammates' work was something I was genuinely scared of at first. The navbar was a safe way to ease into it.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I worked in React Native and implemented the navbar directly on the map screen. Since it is similar to JavaScript, I could manage by just knowing the structure.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">I replaced a basic back button with a floating pill shaped search bar overlay that sits on top of the map. It included:</p>
+          <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-top: 1rem;">
+            <div style="display: flex; gap: 1rem; flex: 1;">
+              <div style="width: 50%;">
+                <img src="img/app_running.PNG" alt="Map screen before" onclick="openLightbox('img/app_running.PNG')" style="width: 100%; border: 1px solid var(--border); cursor: pointer;">
+                <p style="text-align: center; font-family: 'Epilogue', sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 600; margin-top: .5rem;">Before</p>
+              </div>
+              <div style="width: 50%;">
+                <img src="img/app_nav.PNG" alt="Map screen after" onclick="openLightbox('img/app_nav.PNG')" style="width: 100%; border: 1px solid var(--border); cursor: pointer;">
+                <p style="text-align: center; font-family: 'Epilogue', sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 600; margin-top: .5rem;">After</p>
+              </div>
+            </div>
+            <ul class="week-list-body" style="flex: 0 0 40%; margin-top: 0;">
+              <li>A branded leaf icon button in Terra's dark green <span class="code-inline">#2E4A2A</span> that navigates back to the home screen</li>
+              <li>A search input for species and zones</li>
+              <li>A profile button</li>
+              <li>All styled with rounded corners and a subtle drop shadow so it floats cleanly over the map tiles</li>
+            </ul>
+          </div>
+          <br>
+          <p class="week-reflection-body">At this stage the mobile work was purely frontend with no backend connected yet.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">Since the mobile UI and logic was tasked to Mats, my contribution on the mobile side was focused on the frontend UI of the map screen navigation. I worked in React Native to build the navbar and later moved my focus to the dashboard where I could contribute more.<br><br>It was a small but visible contribution and, like I already mentioned, I just wanted to have contributed and start to get the hang of coding and working with Git again. It was small, but to me, a designer who hasn't really touched code in a while, it felt big, even if it was only visual code.</p>
+
+          <p class="doc-subhead">Technology Choice: React Native</p>
+          <p class="week-reflection-body">For the mobile application, we evaluated several cross-platform and native frameworks before settling on React Native.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Alternatives considered:</strong></p>
+          <ul class="week-list-body">
+            <li><strong>Native (Swift / Kotlin)</strong> — would deliver the best performance but requires maintaining two entirely separate codebases for iOS and Android, doubling development effort.</li>
+            <li><strong>Flutter</strong> — Google's cross-platform framework with strong performance, but it uses Dart, a language our team had no prior experience with.</li>
+            <li><strong>Progressive Web App (PWA)</strong> — the simplest option, but limited access to native device features and no presence on the App Store.</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Why React Native:</strong></p>
+          <p class="week-reflection-body">We went with React Native because the team already had JavaScript experience and the web dashboard was built in React with Next.js. This meant the same component structure and TypeScript carried across both platforms, shorter ramp up time and less context switching between the web and mobile codebases.</p>
+        </div>
+
+        <div class="doc-content" id="se3-setup">
           <p class="week-sub">Why</p>
           <p class="week-reflection-body">The software module officially moved from planning to building this week. Which meant I had to actually get the project running on my laptop. That sounds simple. It was not. Before I could contribute any code I needed to get the full development environment set up locally. Every team member had to follow the same setup process so we were all running the same thing.</p>
 
@@ -264,6 +332,7 @@
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('se4', 'dashboarddesign', this)">Dashboard Design</li>
           <li class="week-doc-item" onclick="showDoc('se4', 'dashboard', this)">Building the Dashboard</li>
+          <li class="week-doc-item" onclick="showDoc('se4', 'codedeepdive', this)">Code Deep Dive</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -283,6 +352,58 @@
           <p class="week-reflection-body">I came in with zero experience building something like this and within a couple of days I had a working interactive map connected to a live database with a full UI on top of it. It needed refinement but it was mine and it worked. That felt really good.</p>
           <hr class="doc-divider">
           <img src="img/map_v1.png" alt="Map v1" class="doc-img" onclick="openLightbox('img/map_v1.png')" style="cursor:pointer;">
+        </div>
+
+        <div class="doc-content" id="se4-codedeepdive">
+          <p class="week-sub">Code Deep Dive — Dashboard Map</p>
+          <p class="doc-subhead">Client Rendering <span style="font-weight: 400;">— Line 1</span></p>
+          <pre class="doc-code">'use client';</pre>
+          <p class="week-reflection-body">The very first line of the file. In Next.js components run on the server by default, meaning they get rendered before they even reach the browser. But a map cannot work on a server. It needs the browser to render the tiles, handle the clicks and interact with the user. Adding <span class="code-inline">'use client'</span> at the top tells Next.js to run this component in the browser instead. Without it the whole map would break.</p>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Leaflet Imports <span style="font-weight: 400;">— Lines 4-6</span></p>
+          <pre class="doc-code">import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';</pre>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 4</strong> imports the core React Leaflet components:</p>
+          <ul class="week-list-body">
+            <li><span class="code-inline">MapContainer</span> is the wrapper that renders the actual map on the page</li>
+            <li><span class="code-inline">TileLayer</span> loads the map tiles from OpenStreetMap, the visual layer you see</li>
+            <li><span class="code-inline">Marker</span> places a pin on the map at a specific coordinate</li>
+            <li><span class="code-inline">Popup</span> shows a small info bubble when you click a marker</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 5</strong> imports <span class="code-inline">L</span>, the core Leaflet library. This is used to create and customize the pin icons so they match the Terra brand instead of using the default Leaflet pins.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 6</strong> imports Leaflet's CSS. This one is easy to forget but critical. Without it the map renders completely broken with no styling, overlapping tiles and misaligned controls.</p>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Supabase Client <span style="font-weight: 400;">— Lines 20-23</span></p>
+          <pre class="doc-code">const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);</pre>
+          <p class="week-reflection-body">This is basically logging into the database. You need two things to get in, the address of the database and a key to access it. Instead of writing those directly into the code where anyone could see them, they live in a separate <span class="code-inline">.env</span> file that never gets shared or pushed to Git.</p>
+          <p class="doc-subhead">Fetching Data <span style="font-weight: 400;">— Line 73</span></p>
+          <pre class="doc-code">supabase.rpc('get_entries_by_status', { p_status: 'approved' })</pre>
+          <p class="week-reflection-body">This is where the actual data gets fetched. Instead of writing a full database query from scratch, <span class="code-inline">rpc</span> lets you call a function that already lives inside Supabase. In this case <span class="code-inline">get_entries_by_status</span> with the status set to approved, so only approved observations come back.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The reason it is done this way is security. The function runs with <span class="code-inline">SECURITY DEFINER</span> which means Supabase controls exactly what data gets returned. You cannot accidentally pull data you are not supposed to see.</p>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Custom Map Pin <span style="font-weight: 400;">— Lines 28-34</span></p>
+          <pre class="doc-code">function makeIcon() {
+  const svg = `&lt;svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40"&gt;
+    &lt;path d="M14 0C6.27 0 0 6.27 0 14c0 9.625 14 26 14 26S28 23.625 28 14C28 6.27 21.73 0 14 0z" fill="${PIN_COLOUR}"/&gt;
+    &lt;circle cx="14" cy="14" r="5.5" fill="white"/&gt;
+  &lt;/svg&gt;`;
+  return L.divIcon({ html: svg, className: '', iconSize: [28, 40], iconAnchor: [14, 40], popupAnchor: [0, -40] });
+}</pre>
+          <p class="week-reflection-body">The default Leaflet pin is blue and generic so I wanted something that matched Terra. Instead of using an image file, the pin is built directly in SVG inside the code. It has two shapes, a dark green teardrop using Terra's <span class="code-inline">#2E4A2A</span> for the body and a white circle in the middle.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">L.divIcon</span> takes that SVG and turns it into an actual map pin Leaflet can use. A few things worth noting:</p>
+          <ul class="week-list-body">
+            <li><span class="code-inline">iconSize: [28, 40]</span> — the pin is 28px wide and 40px tall</li>
+            <li><span class="code-inline">iconAnchor: [14, 40]</span> — the very tip of the pin sits exactly on the coordinates so it points to the right spot on the map</li>
+            <li><span class="code-inline">popupAnchor: [0, -40]</span> — makes the popup appear above the pin so it does not cover it</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">Every single pin on the map comes from this one function.</p>
         </div>
 
         <div class="doc-content active" id="se4-dashboarddesign">
