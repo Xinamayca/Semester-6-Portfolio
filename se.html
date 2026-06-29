@@ -333,6 +333,7 @@
           <li class="week-doc-item active" onclick="showDoc('se4', 'dashboarddesign', this)">Dashboard Design</li>
           <li class="week-doc-item" onclick="showDoc('se4', 'dashboard', this)">Building the Dashboard</li>
           <li class="week-doc-item" onclick="showDoc('se4', 'codedeepdive', this)">Code Deep Dive</li>
+          <li class="week-doc-item" onclick="showDoc('se4', 'glassmorphism', this)">Glass-morphism Design Update</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -356,6 +357,11 @@
 
         <div class="doc-content" id="se4-codedeepdive">
           <p class="week-sub">Code Deep Dive — Dashboard Map</p>
+          <p class="week-reflection-body">The following is a breakdown of the key parts of the dashboard map I built. I chose to go into detail on these specific sections because together they tell the full story of how the map works, from setting it up in the browser, to connecting to the database, to fetching the right data, to rendering it all visually on screen.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Each section covers a different layer of the component. Some are about technical setup, some are about solving specific problems like overlapping pins, and some are about making design decisions in code like the custom Terra pin. The goal is to show not just what I built but why each part is there and how they all connect to make the map work as one thing.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">This breakdown is based on commit <span class="code-inline">b3b1b22c</span>.</p>
+
+          <hr class="doc-divider">
           <p class="doc-subhead">Client Rendering <span style="font-weight: 400;">— Line 1</span></p>
           <pre class="doc-code">'use client';</pre>
           <p class="week-reflection-body">The very first line of the file. In Next.js components run on the server by default, meaning they get rendered before they even reach the browser. But a map cannot work on a server. It needs the browser to render the tiles, handle the clicks and interact with the user. Adding <span class="code-inline">'use client'</span> at the top tells Next.js to run this component in the browser instead. Without it the whole map would break.</p>
@@ -382,10 +388,6 @@ import 'leaflet/dist/leaflet.css';</pre>
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );</pre>
           <p class="week-reflection-body">This is basically logging into the database. You need two things to get in, the address of the database and a key to access it. Instead of writing those directly into the code where anyone could see them, they live in a separate <span class="code-inline">.env</span> file that never gets shared or pushed to Git.</p>
-          <p class="doc-subhead">Fetching Data <span style="font-weight: 400;">— Line 73</span></p>
-          <pre class="doc-code">supabase.rpc('get_entries_by_status', { p_status: 'approved' })</pre>
-          <p class="week-reflection-body">This is where the actual data gets fetched. Instead of writing a full database query from scratch, <span class="code-inline">rpc</span> lets you call a function that already lives inside Supabase. In this case <span class="code-inline">get_entries_by_status</span> with the status set to approved, so only approved observations come back.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">The reason it is done this way is security. The function runs with <span class="code-inline">SECURITY DEFINER</span> which means Supabase controls exactly what data gets returned. You cannot accidentally pull data you are not supposed to see.</p>
 
           <hr class="doc-divider">
           <p class="doc-subhead">Custom Map Pin <span style="font-weight: 400;">— Lines 28-34</span></p>
@@ -404,6 +406,88 @@ import 'leaflet/dist/leaflet.css';</pre>
             <li><span class="code-inline">popupAnchor: [0, -40]</span> — makes the popup appear above the pin so it does not cover it</li>
           </ul>
           <p class="week-reflection-body" style="margin-top:1rem;">Every single pin on the map comes from this one function.</p>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Pin Spreading <span style="font-weight: 400;">— Lines 36-55</span></p>
+          <pre class="doc-code">function spreadPins(pins: Entry[]) {
+  const groups: Record&lt;string, Entry[]&gt; = {};
+  for (const pin of pins) {
+    const key = `${pin.latitude},${pin.longitude}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(pin);
+  }
+  return pins.map(pin =&gt; {
+    const key = `${pin.latitude},${pin.longitude}`;
+    const group = groups[key];
+    if (group.length === 1) return { ...pin, _lat: pin.latitude, _lng: pin.longitude };
+    const idx = group.indexOf(pin);
+    const angle = (2 * Math.PI * idx) / group.length;
+    return {
+      ...pin,
+      _lat: pin.latitude  + OFFSET_RADIUS * Math.cos(angle),
+      _lng: pin.longitude + OFFSET_RADIUS * Math.sin(angle),
+    };
+  });
+}</pre>
+          <p class="week-reflection-body">This one solved a problem I did not even think about until it became obvious. In an arboretum multiple people can submit an observation at the exact same GPS location. Two people logging the same tree for example. If you just drop two pins on the same coordinates they stack on top of each other and you would never know the second one exists.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">This function fixes that. It first groups all pins by their coordinates. If a location only has one pin it stays exactly where it is. If there are multiple pins at the same spot it fans them out in a small circle around the original point using <span class="code-inline">Math.cos</span> and <span class="code-inline">Math.sin</span> to calculate evenly spaced positions. <span class="code-inline">OFFSET_RADIUS</span> controls how far apart they spread, just a few meters in real distance so it looks natural on the map.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The result is that instead of pins hiding behind each other they appear as a small visible cluster, all individually clickable.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>what it looks like</em></p>
+          <img src="img/pin_cluster_V0.png" alt="Pins fanned out into a visible cluster" class="doc-img" onclick="openLightbox('img/pin_cluster_V0.png')" style="cursor:pointer;">
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Loading the Data <span style="font-weight: 400;">— Lines 72-77</span></p>
+          <pre class="doc-code">useEffect(() =&gt; {
+  supabase.rpc('get_entries_by_status', { p_status: 'approved' }).then(({ data }) =&gt; {
+    const rows = (Array.isArray(data) ? data : []) as Entry[];
+    setEntries(rows.filter(e =&gt; e.latitude != null &amp;&amp; e.longitude != null));
+  });
+}, []);</pre>
+          <p class="week-reflection-body">This is what actually makes the map load with data. <span class="code-inline">useEffect</span> is a React hook that runs code at a specific moment. The <span class="code-inline">[]</span> at the end means it runs once, right when the page loads. Think of it as "when the map opens, do this."</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Here is what happens in order:</p>
+          <ul class="week-list-body">
+            <li>It calls Supabase to fetch all approved observations from the database</li>
+            <li>When the data comes back it checks it is actually an array, if not it defaults to empty so nothing breaks</li>
+            <li>It then filters out any entries that are missing coordinates because you cannot place a pin on a map without a latitude and longitude</li>
+            <li>Finally it stores the clean results using <span class="code-inline">setEntries</span> which triggers the map to re-render with all the pins in place</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">Without this the database call would never happen and the map would just be an empty map with no pins. This is the trigger that kicks off the whole data flow the moment the page loads.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The reason it fetches the data this way is security. Instead of writing a full database query from scratch, <span class="code-inline">rpc</span> calls a function that already lives inside Supabase, <span class="code-inline">get_entries_by_status</span>, which runs with <span class="code-inline">SECURITY DEFINER</span>. This means Supabase controls exactly what data gets returned, so you cannot accidentally pull data you are not supposed to see.</p>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Rendering the Map <span style="font-weight: 400;">— Lines 106-117</span></p>
+          <pre class="doc-code">&lt;MapContainer center={CENTRE} zoom={15} style={{ height: '100%', width: '100%' }} zoomControl&gt;
+  &lt;TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={19} /&gt;
+  {spreadPins(filtered).map(e =&gt; (
+    &lt;Marker key={e.entry_id} position={[e._lat, e._lng]} icon={icon}&gt;
+      &lt;Popup&gt;
+        &lt;strong&gt;{e.name}&lt;/strong&gt;&lt;br /&gt;
+        {e.element_type?.replace(/_/g, ' ')}{e.classification ? ` · ${e.classification}` : ''}&lt;br /&gt;
+        {e.observer &amp;&amp; &lt;&gt;{e.observer} · &lt;/&gt;}{timeAgo(e.created_at)}
+      &lt;/Popup&gt;
+    &lt;/Marker&gt;
+  ))}
+&lt;/MapContainer&gt;</pre>
+          <p class="week-reflection-body">This is where everything comes together. All the functions written above get used here in one block.</p>
+          <ul class="week-list-body">
+            <li><span class="code-inline">MapContainer</span> is the map wrapper. It opens centred on the arboretum, starts at zoom level 15 which is street level and fills the full screen.</li>
+            <li><span class="code-inline">TileLayer</span> loads the actual OpenStreetMap imagery inside the container. The streets, labels and landscape you see behind the pins all come from here.</li>
+            <li><span class="code-inline">spreadPins(filtered).map</span> takes the filtered entries after search, runs them through <span class="code-inline">spreadPins</span> to handle any overlapping coordinates and then loops through each one to place it on the map.</li>
+            <li><span class="code-inline">Marker</span> drops a pin for each entry at its exact coordinates using the custom Terra pin from <span class="code-inline">makeIcon()</span>.</li>
+            <li><span class="code-inline">Popup</span> is the info bubble that appears when you click a pin. It shows the entry name, the element type with underscores cleaned up, the classification if it has one, who submitted it and how long ago using <span class="code-inline">timeAgo()</span>.</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">This block is basically the payoff of all the setup. The database fetch, the custom icon, the spread logic and the search filter all feed into these 12 lines.</p>
+          <hr class="doc-divider">
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>version 0 of the dashboard in action</em></p>
+          <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+            <source src="img/dashboard_v1.mp4" type="video/mp4">
+          </video>
+          <p class="week-reflection-body" style="margin-top:1rem;">This was the first working version of the dashboard, which I kept iterating on afterwards, refining the design and layout into the final version the team delivered.</p>
+        </div>
+
+        <div class="doc-content" id="se4-glassmorphism">
+          <p class="week-sub">Glass-morphism Design Update</p>
+          <p class="week-reflection-body">Content coming soon.</p>
         </div>
 
         <div class="doc-content active" id="se4-dashboarddesign">
