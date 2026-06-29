@@ -486,8 +486,47 @@ import 'leaflet/dist/leaflet.css';</pre>
         </div>
 
         <div class="doc-content" id="se4-glassmorphism">
-          <p class="week-sub">Glass-morphism Design Update</p>
-          <p class="week-reflection-body">Content coming soon.</p>
+          <p class="week-sub">Dashboard Redesign — Glass Morphism and Review Queue</p>
+          <p class="week-reflection-body">The day after building the initial map I went back in and redesigned the whole thing. The first version was functional but it needed to look and work better.</p>
+
+          <p class="doc-subhead">Visual Redesign — Glass Morphism</p>
+          <p class="week-reflection-body">I introduced a glass morphism design system across the dashboard. Frosted glass panels floating over the live map using CSS <span class="code-inline">backdrop-filter: blur(16px)</span> with a semi-transparent warm cream background. This became the visual language for the whole dashboard going forward, everything consistent and on brand.</p>
+
+          <p class="doc-subhead">Pin System Overhaul</p>
+          <p class="week-reflection-body">I replaced the single teardrop pin with a colour coded dot system. Green for approved entries and dark forest green for pending. The map now fetched and displayed both at the same time so reviewers could see the full picture at a glance without switching between views.</p>
+
+          <p class="doc-subhead">Review Queue</p>
+          <p class="week-reflection-body">I added a full queue view showing all entries across three statuses, pending, approved and declined, with filter tabs to switch between them. This was the first time the dashboard had actual reviewer functionality rather than just being a read only map. Staff could now actually do something with the data.</p>
+
+          <p class="doc-subhead">Data Expansion</p>
+          <p class="week-reflection-body">The app now fetched all three entry statuses in parallel from Supabase instead of just approved ones. I also added status badges colour coded by state, yellow for pending, green for approved and red for declined, so the status of each entry was immediately visible without having to click into it.</p>
+
+          <p class="week-reflection-body" style="margin-top:1rem;">Going from a read only map to a functional reviewer tool in one commit was a big jump and honestly one of the things I am most proud of from this module.</p>
+
+          <hr class="doc-divider">
+          <p class="week-sub">Key Code Changes</p>
+
+          <p class="doc-subhead">1. Glass Morphism Style <span style="font-weight: 400;">— Lines 85-91</span></p>
+          <pre class="doc-code">backdrop-filter: blur(16px);
+background: rgba(245,241,235,0.75);</pre>
+          <p class="week-reflection-body">This is the signature visual of the whole dashboard. Instead of solid white panels everything uses a frosted glass effect. <span class="code-inline">backdrop-filter: blur(16px)</span> blurs whatever is behind the panel which is the live map, and <span class="code-inline">rgba(245,241,235,0.75)</span> makes it 75% opaque warm cream. One glass object defined once and applied to every panel so the whole UI stays consistent.</p>
+
+          <p class="doc-subhead">2. Parallel Data Fetching <span style="font-weight: 400;">— Lines 104-114</span></p>
+          <pre class="doc-code">Promise.all([
+  supabase.rpc('get_entries_by_status', { p_status: 'approved' }),
+  supabase.rpc('get_entries_by_status', { p_status: 'pending' }),
+  supabase.rpc('get_entries_by_status', { p_status: 'declined' }),
+])</pre>
+          <p class="week-reflection-body">The previous version only fetched approved entries. This version uses <span class="code-inline">Promise.all</span> to fetch approved, pending and declined all at the same time in parallel. The page does not have to wait for one to finish before starting the next. Faster load and now the dashboard has the full picture.</p>
+
+          <p class="doc-subhead">3. Colour Coded Pin System <span style="font-weight: 400;">— Lines 31-43</span></p>
+          <p class="week-reflection-body">Replaced the single teardrop pin with a <span class="code-inline">makePin()</span> function that takes any colour and builds a small circular dot pin. Two variants, green for approved and dark forest green for pending. Reviewers can now see at a glance which entries still need attention directly on the map.</p>
+
+          <p class="doc-subhead">4. View Switching — Map vs Queue <span style="font-weight: 400;">— Lines 97, 163-174</span></p>
+          <p class="week-reflection-body">Added a view state that toggles between the map and the review queue. The navbar has two pill buttons, Map and Queue, and the Queue button shows a live yellow badge with the pending count so reviewers always know how many entries need attention without clicking into anything.</p>
+
+          <p class="doc-subhead">5. Review Queue Table <span style="font-weight: 400;">— Lines 289-314</span></p>
+          <p class="week-reflection-body">A full table view of all entries with columns for ID, name, type, classification, submission date, status badge and a View button linking to the individual entry review page. Filter tabs at the top let reviewers narrow down by status.</p>
         </div>
 
         <div class="doc-content active" id="se4-dashboarddesign">
