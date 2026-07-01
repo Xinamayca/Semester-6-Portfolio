@@ -496,7 +496,7 @@ import 'leaflet/dist/leaflet.css';</pre>
           <p class="week-reflection-body">I replaced the single teardrop pin with a colour coded dot system. Green for approved entries and dark forest green for pending. The map now fetched and displayed both at the same time so reviewers could see the full picture at a glance without switching between views.</p>
 
           <p class="doc-subhead">Review Queue</p>
-          <p class="week-reflection-body">I added a full queue view showing all entries across three statuses, pending, approved and declined, with filter tabs to switch between them. This was the first time the dashboard had actual reviewer functionality rather than just being a read only map. Staff could now actually do something with the data.</p>
+          <p class="week-reflection-body">I added a full queue view showing all entries across three statuses, pending, approved and declined, with filter tabs to switch between them. The most important part of this update was bringing together what used to be separate screens for approved and declined entries into one single view with filtering. Instead of navigating between screens, reviewers can now see everything in one place and filter by status with one click. This made the whole reviewer experience significantly more intuitive. This was also the first time the dashboard had actual reviewer functionality rather than just being a read only map. Staff could now actually do something with the data.</p>
 
           <p class="doc-subhead">Data Expansion</p>
           <p class="week-reflection-body">The app now fetched all three entry statuses in parallel from Supabase instead of just approved ones. I also added status badges colour coded by state, yellow for pending, green for approved and red for declined, so the status of each entry was immediately visible without having to click into it.</p>
@@ -505,6 +505,7 @@ import 'leaflet/dist/leaflet.css';</pre>
 
           <hr class="doc-divider">
           <p class="week-sub">Key Code Changes</p>
+          <p class="week-reflection-body">These changes are based on commit <span class="code-inline">080ba932</span>.</p>
 
           <p class="doc-subhead">1. Glass Morphism Style <span style="font-weight: 400;">— Lines 85-91</span></p>
           <pre class="doc-code">backdrop-filter: blur(16px);
@@ -527,6 +528,32 @@ background: rgba(245,241,235,0.75);</pre>
 
           <p class="doc-subhead">5. Review Queue Table <span style="font-weight: 400;">— Lines 289-314</span></p>
           <p class="week-reflection-body">A full table view of all entries with columns for ID, name, type, classification, submission date, status badge and a View button linking to the individual entry review page. Filter tabs at the top let reviewers narrow down by status.</p>
+          <hr class="doc-divider">
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>the redesigned dashboard in action</em></p>
+          <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+            <source src="img/dashboard_v2.mp4" type="video/mp4">
+          </video>
+
+          <hr class="doc-divider">
+          <p class="week-sub">Small but Meaningful Update</p>
+          <p class="week-reflection-body">These changes are based on commit <span class="code-inline">01c6c367</span>.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Two small changes that made a visible difference.</p>
+
+          <p class="doc-subhead">Navbar Icon Swap</p>
+          <p class="week-reflection-body">Replaced the inline leaf SVG in the navbar with the actual branded Terra leaf icon, a shield and leaf shape with a stem and two branch lines drawn in cream <span class="code-inline">#f6f1eb</span> on dark green. The icon files were also copied into <span class="code-inline">apps/web/public/</span> so they are properly accessible on the web side. A small change but it meant the navbar finally used the real Terra brand asset instead of a placeholder.</p>
+
+          <p class="doc-subhead">Queue Overlay Background</p>
+          <p class="week-reflection-body">Changed the review queue overlay from frosted glass with <span class="code-inline">backdrop-filter: blur(20px)</span> to a solid cream <span class="code-inline">#F5F1EB</span>. The blur effect over the map looked good on the map view but for a table with a lot of data it was harder to read and likely caused some performance issues. Solid background is cleaner and more readable for reviewing entries.</p>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <div style="width: 50%;">
+              <img src="img/review_0.png" alt="Review queue with frosted glass overlay" onclick="openLightbox('img/review_0.png')" style="width: 100%; border: 1px solid var(--border); cursor: pointer;">
+              <p style="text-align: center; font-family: 'Epilogue', sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 600; margin-top: .5rem;">Before</p>
+            </div>
+            <div style="width: 50%;">
+              <img src="img/review_1.png" alt="Review queue with solid cream background" onclick="openLightbox('img/review_1.png')" style="width: 100%; border: 1px solid var(--border); cursor: pointer;">
+              <p style="text-align: center; font-family: 'Epilogue', sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 600; margin-top: .5rem;">After</p>
+            </div>
+          </div>
         </div>
 
         <div class="doc-content active" id="se4-dashboarddesign">
