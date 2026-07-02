@@ -586,6 +586,8 @@ background: rgba(245,241,235,0.75);</pre>
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('se5', 'techstack', this)">Tech Stack</li>
+          <li class="week-doc-item" onclick="showDoc('se5', 'login', this)">Login Page Design</li>
+          <li class="week-doc-item" onclick="showDoc('se5', 'finaltouches', this)">Final Touches</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -611,6 +613,102 @@ background: rgba(245,241,235,0.75);</pre>
           <p class="week-reflection-body">Looking at the stack now I can see how the choices connect back to the quality attributes we defined in week 1. Supabase supports our Scalability requirements, OpenStreetMap directly addresses Cost Efficiency, and Expo Go supports Compatibility since it works across devices. The decisions were not random, they tied back to what the team agreed mattered most from the start.</p>
           <hr class="doc-divider">
           <img src="img/tech_stack.png" alt="Tech Stack" class="doc-img" onclick="openLightbox('img/tech_stack.png')" style="cursor:pointer;">
+        </div>
+
+        <div class="doc-content" id="se5-login">
+          <p class="week-sub">Login Page — Design Contribution</p>
+          <p class="week-reflection-body">My contribution to the login page was on the design side. I gathered inspiration, shared it with the team and we discussed together what we wanted it to look like. I also created prototypes based on that inspiration to give Armend a clear direction to build from.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Originally I wanted to use a real photograph of the Humber Arboretum as the background but according to my teammates that style felt outdated. So instead we went with a gradient background combined with glass morphism elements.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>the inspiration I gathered</em></p>
+          <img src="img/Loginpage_inspo.png" alt="Login page design inspiration" class="doc-img" onclick="openLightbox('img/Loginpage_inspo.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">That decision actually became the origin of the visual language that carried across the whole dashboard. The frosted glass panels, the warm cream tones, the layered feel, it all started here with the login page and then got applied consistently everywhere else. Giving the product a very modern iOS feel instead of a static boring website.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>the prototypes I created</em></p>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <img src="img/prototype_1.png" alt="Login page prototype 1" onclick="openLightbox('img/prototype_1.png')" style="width: 50%; border: 1px solid var(--border); cursor: pointer;">
+            <img src="img/prototype_2.png" alt="Login page prototype 2" onclick="openLightbox('img/prototype_2.png')" style="width: 50%; border: 1px solid var(--border); cursor: pointer;">
+          </div>
+          <p class="week-reflection-body" style="margin-top:1rem;">It is a good example of how a design decision made early on can shape the look and feel of an entire product.</p>
+        </div>
+
+        <div class="doc-content" id="se5-finaltouches">
+          <p class="week-sub">Final Touches</p>
+          <p class="week-reflection-body">This was commit <span class="code-inline">1e74652a</span>.</p>
+          <p class="doc-subhead">The Search Feature</p>
+          <p class="week-reflection-body">Typing a name in the navbar filters entries in real time and triggers a smooth fly-to animation on the map using <span class="code-inline">map.flyTo</span> with a 1.2 second duration. It automatically opens the popup and selects the pin at the same time. The search, the map movement and the pin state all coordinate together in one seamless flow.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">This was actually one of the trickier parts to build. The issue was timing. When the map finishes flying to a location, the code needs to find the pin and activate it, open the popup and add the glowing ring. But Leaflet does not always render the pin's HTML element immediately when the map stops moving. It only renders markers when it needs to, called lazy rendering, which meant the pin sometimes did not exist in the browser yet by the time the code tried to find it.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The solution was a retry loop inside <span class="code-inline">FlyToController</span>:</p>
+          <pre class="doc-code">retriesLeft: 10
+setTimeout(retry, 200)</pre>
+          <p class="week-reflection-body">Instead of trying once and failing, the code tries up to 10 times waiting 200 milliseconds between each attempt. It keeps checking "is the pin there yet?" until it finds it and then activates it.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">map.once('moveend')</span> on line 64 makes sure the whole sequence waits for the fly animation to fully finish before even starting to look for the pin. Without that it would be trying to activate something that has not loaded yet.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Getting this right took some back and forth but the end result is a search that feels completely seamless.</p>
+          <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+            <source src="img/search_func.mp4" type="video/mp4">
+          </video>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Custom SVG Pins</p>
+          <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-top: 1rem;">
+            <img src="img/pins.png" alt="Pin design options" onclick="openLightbox('img/pins.png')" style="width: 35%; border: 1px solid var(--border); cursor: pointer; flex-shrink: 0;">
+            <div>
+              <p class="week-reflection-body" style="margin-top:0;">Before building the new pins I put together four design options and discussed them with the team. Options 1 and 2 were not teardrop shapes so those were out. Option 4 was a teardrop but honestly it just did not look great. Option 3 was the one we all agreed on. It kept the classic teardrop feel but with a more modern look, a clean shape with an icon inside that felt intentional rather than generic.</p>
+              <p class="week-reflection-body" style="margin-top:1rem;">I originally wanted to use a regular green for the approved pin but one of my teammates pushed for keeping the Terra branding consistent in the pins as well. So we went with the darker Terra green <span class="code-inline">#2E4A2A</span> instead. A small detail but it kept everything tied to the brand.</p>
+              <p class="week-reflection-body" style="margin-top:1rem;">I built the pins with three variants. Dark Terra green with a checkmark for approved entries, yellow with a clock icon for pending, and red with an exclamation mark for critical states. The reason I added icons inside the pins rather than relying on colour alone was accessibility. We received feedback that colour blind users would not be able to distinguish between pin statuses if colour was the only indicator. Adding a recognisable icon inside each pin means anyone can tell the status at a glance without clicking anything, regardless of how they perceive colour.</p>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+          <p class="doc-subhead">Pin Interactions</p>
+          <p class="week-reflection-body">I added hover, select and pulse ring states to every pin. Clicking a pin highlights it with an animated glowing ring, green for approved and yellow for pending, opens the popup and keeps the pin selected until the popup is closed.</p>
+
+          <p class="doc-subhead">Hover <span style="font-weight: 400;">— Line 846</span></p>
+          <pre class="doc-code">.terra-pin:hover { transform: scale(1.2); }</pre>
+          <p class="week-reflection-body">Simple on the surface, the pin scales up 20% on hover. But the reason it feels springy and bouncy rather than just growing is the transition on line 844:</p>
+          <pre class="doc-code">transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);</pre>
+          <p class="week-reflection-body">The <span class="code-inline">cubic-bezier</span> with the 1.56 value is what causes the overshoot. It goes slightly past the target scale and snaps back, giving it that bounce feeling. Getting that easing curve right is what makes the difference between something that feels alive and something that just moves.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The tricky part was that Leaflet pins are not normal DOM elements. Leaflet manages them separately from React so you cannot just add a CSS class the normal way. The <span class="code-inline">.terra-pin</span> class had to be injected directly into the SVG HTML string inside <span class="code-inline">makeApprovedPin()</span> and <span class="code-inline">makePendingPin()</span>, and then the CSS targets it globally in <span class="code-inline">globals.css</span>. If the class name was wrong or the CSS was not global the hover would just not work at all.</p>
+
+          <p class="doc-subhead">Pin Click Interaction <span style="font-weight: 400;">— Lines 820-834</span></p>
+          <p class="week-reflection-body">When a pin is clicked it first deselects whatever was previously selected by removing the <span class="code-inline">selected</span> class and the pulse div. Then it adds <span class="code-inline">selected</span> to the new pin and dynamically creates a <span class="code-inline">pin-pulse</span> div and injects it inside the pin element. The pulse colour is set based on status, <span class="code-inline">#E6A817</span> yellow for pending and <span class="code-inline">#4caf50</span> green for approved. This is all direct DOM manipulation on top of Leaflet's rendering rather than letting React handle it, which gave full control over exactly how the selected state looked and animated.</p>
+
+          <p class="doc-subhead">Pin Add Event <span style="font-weight: 400;">— Lines 798-818</span></p>
+          <p class="week-reflection-body">Every time a pin is added to the map it stores its <span class="code-inline">entry_id</span> and status as data attributes on the element. It also checks if this pin was the one targeted by a search fly-to. If it was, it immediately selects itself and opens its popup without waiting for a click. This is what makes the search feel seamless, the pin knows it is the destination and activates itself automatically.</p>
+
+          <p class="doc-subhead">Queue Filtering <span style="font-weight: 400;">— Lines 751-759</span></p>
+          <p class="week-reflection-body">All filtering happens client-side using <span class="code-inline">useMemo</span>, meaning no extra database calls are made every time someone filters. It chains three filters in order, status, type and classification, and name search. Then sorts by date using <span class="code-inline">.getTime()</span> to flip between newest and oldest. <span class="code-inline">useMemo</span> means the filtering only recalculates when one of the filter values actually changes, not on every single render. Keeps it fast and efficient.</p>
+
+          <hr class="doc-divider">
+          <p class="week-sub">Final Final Touches</p>
+          <p class="week-reflection-body">The last round of commits were a mix of bug fixes, visual polish and small but meaningful UX improvements that brought the dashboard to its finished state for the Vienna module.</p>
+
+          <p class="doc-subhead">Bug Fixes <span style="font-weight: 400;">— <span class="code-inline">300ccfdc</span></span></p>
+          <p class="week-reflection-body">Fixed a bug where clicking any pin always opened the popup regardless of state. Also updated the map legend to only show the two actual pin statuses in use, approved and pending, rather than all possible states.</p>
+
+          <p class="doc-subhead">Pin Size and Pulse Ring <span style="font-weight: 400;">— <span class="code-inline">51bccb9a</span></span></p>
+          <p class="week-reflection-body">Increased pin size from 26×35px to 32×43px to make them more visible and easier to click on the map. Repositioned the pulse ring to stay centered on the larger pin.</p>
+
+          <p class="doc-subhead">Navbar Logo <span style="font-weight: 400;">— <span class="code-inline">67145abb</span></span></p>
+          <p class="week-reflection-body">Swapped the navbar logo to the proper Terra Icon_Light SVG at a larger size and tightened the navbar padding. Small but it made the top bar feel more finished and on brand.</p>
+
+          <p class="doc-subhead">Logo Navigation <span style="font-weight: 400;">— <span class="code-inline">f5ac5ad8</span></span></p>
+          <p class="week-reflection-body">One line of code but a meaningful UX addition. Clicking the Terra logo now navigates back to the map view from anywhere in the dashboard. Standard navigation behaviour that was missing.</p>
+
+          <p class="doc-subhead">Pin Redesign <span style="font-weight: 400;">— <span class="code-inline">29bfb59d</span></span></p>
+          <p class="week-reflection-body">Redesigned the pins from a rounded square shape back to a classic teardrop. Approved changed to dark forest green <span class="code-inline">#2e4a2a</span> and pending stayed yellow. Cleaner and more on brand.</p>
+
+          <p class="doc-subhead">Entry ID Search <span style="font-weight: 400;">— <span class="code-inline">0c6a53b2</span></span></p>
+          <p class="week-reflection-body">Added the entry ID to popup cards and search filters. Also added support for searching with a # prefix to find entries by ID number directly, useful for staff who know the exact entry they are looking for.</p>
+
+          <p class="doc-subhead">ID Search Polish <span style="font-weight: 400;">— <span class="code-inline">6def938f</span></span></p>
+          <p class="week-reflection-body">Wired up the ID search fully, switched the queue overlay to a solid cream background and did a general navbar and UI polish pass to tighten everything up.</p>
+
+          <p class="doc-subhead">Live Hashtag Search Dropdown <span style="font-weight: 400;">— <span class="code-inline">f77a8cfb</span></span></p>
+          <p class="week-reflection-body">The hashtag search now shows a live dropdown of results while typing and flies the map to the selected pin on click. Makes finding a specific entry fast and intuitive without having to know the exact ID.</p>
+          <hr class="doc-divider">
+          <p class="week-reflection-body" style="margin-top:1rem;"><em>the finished dashboard</em></p>
+          <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+            <source src="img/finall_dash.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
