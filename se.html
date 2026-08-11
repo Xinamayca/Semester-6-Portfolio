@@ -53,6 +53,7 @@
     <button class="week-tab" onclick="showWeekSE(3, this)">Week 3</button>
     <button class="week-tab" onclick="showWeekSE(4, this)">Week 4</button>
     <button class="week-tab" onclick="showWeekSE(5, this)">Week 5</button>
+    <button class="week-tab" onclick="showWeekSE('labs', this)">Lab Exercises</button>
     <button class="week-tab" onclick="showWeekSE('reflection', this)">Reflection</button>
   </div>
 
@@ -709,6 +710,49 @@ setTimeout(retry, 200)</pre>
           <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
             <source src="img/finall_dash.mp4" type="video/mp4">
           </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab Exercises -->
+  <div class="week-panel" id="se-week-labs">
+    <div class="week-panel-header">
+      <h2 class="week-panel-title">Lab Exercises</h2>
+    </div>
+    <div class="week-panel-body">
+      <div class="week-docs">
+        <p class="week-docs-label">Deliverables</p>
+        <ul class="week-doc-list">
+          <li class="week-doc-item active" onclick="showDoc('selabs', 'lab6', this)">Lab 6 — Contact Management API</li>
+        </ul>
+      </div>
+      <div class="week-reflection">
+        <div class="doc-content active" id="selabs-lab6">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">This lab was the first of three progressive exercises building a Contact Management REST API in ASP.NET Core. The goal was to build a working API that can create, read, update and delete contacts with all data stored in memory. I had never worked with C# or anything API related before so I used AI to help me understand the steps and generate a guide to work from.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">I created the project using <span class="code-inline">dotnet new webapi</span> in the terminal and built it following a clean structure of Controller, Repository and Model. I used an interface called <span class="code-inline">IContactRepository</span> to abstract the storage so the controller never touches the data directly, it just calls the repository. The actual data is stored in a simple list in memory using <span class="code-inline">InMemoryContactRepository</span> with an auto incrementing ID counter. The repository was registered as a singleton in <span class="code-inline">Program.cs</span> so the same list persists across all requests for the lifetime of the app.</p>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">The controller exposes the full CRUD surface at <span class="code-inline">api/contacts</span>:</p>
+          <ul class="week-list-body">
+            <li><span class="code-inline">GET /</span> — list all contacts</li>
+            <li><span class="code-inline">GET /{id}</span> — fetch one contact or return 404 if not found</li>
+            <li><span class="code-inline">POST /</span> — create a new contact, returns 201 with a location header</li>
+            <li><span class="code-inline">PUT /{id}</span> — update a contact, returns 204 or 404</li>
+            <li><span class="code-inline">DELETE /{id}</span> — remove a contact, returns 204 or 404</li>
+          </ul>
+          <img src="img/Lab_6.png" alt="Lab 6 CRUD flow via curl" class="doc-img" onclick="openLightbox('img/Lab_6.png')" style="cursor:pointer;">
+          <div class="doc-btn-row" style="margin-top:1rem;">
+            <a href="Lab_6_ContactManagement.zip" download class="doc-btn">Download Lab 6 Source (.zip)</a>
+          </div>
+          <p class="week-reflection-body" style="margin-top:1rem;">I tested everything using <span class="code-inline">curl</span> in the terminal. The screenshot above shows the full flow in action, creating a contact, fetching it, updating it, deleting it and confirming it returns 404 afterwards. I even added myself as a contact which felt appropriate.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">I ran into a few issues along the way. The machine had .NET 7 installed instead of .NET 8 which the guide assumed but this was not a blocker. The VS Code GUI could not find the SDK so I created the project via the terminal instead. VS Code also showed compile errors about a missing Models namespace which turned out to be because I had never created the model file yet. And I used the wrong port number from the guide instead of reading the actual port the app printed. All small things but good learning moments.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">This was my second time working with C# and my first time with ASP.NET Core and honestly the structure made more sense than I expected. Controller, Repository and Model each have a clear responsibility and connect through interfaces, which reminded me of how components work in frontend development. I also learned about dependency injection for the first time. Most importantly I learned to read error messages carefully and always check the actual running environment rather than assuming what the guide says.</p>
         </div>
       </div>
     </div>
