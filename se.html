@@ -51,7 +51,7 @@
     <button class="week-tab active" onclick="showWeekSE(1, this)">Week 1</button>
     <button class="week-tab" onclick="showWeekSE(2, this)">Week 2<span class="new-badge">Updated</span></button>
     <button class="week-tab" onclick="showWeekSE(3, this)">Week 3</button>
-    <button class="week-tab" onclick="showWeekSE(4, this)">Week 4</button>
+    <button class="week-tab" onclick="showWeekSE(4, this)">Week 4<span class="new-badge">Updated</span></button>
     <button class="week-tab" onclick="showWeekSE(5, this)">Week 5</button>
     <button class="week-tab" onclick="showWeekSE('labs', this)">Lab Exercises<span class="new-badge">New</span></button>
     <button class="week-tab" onclick="showWeekSE('reflection', this)">Reflection</button>
@@ -324,8 +324,12 @@
 
   <!-- Week 4 -->
   <div class="week-panel" id="se-week-4">
-    <div class="week-panel-header">
+    <div class="week-panel-header" style="display:flex; align-items:center; justify-content:space-between;">
       <h2 class="week-panel-title">Week 4</h2>
+      <div class="version-switch" style="margin-bottom:0;">
+        <button class="version-switch-btn active" id="codedive-switch-v1" onclick="setVersion('codedive','v1')">Version 1</button>
+        <button class="version-switch-btn" id="codedive-switch-v2" onclick="setVersion('codedive','v2')">Version 2</button>
+      </div>
     </div>
     <div class="week-panel-body">
       <div class="week-docs">
@@ -333,7 +337,7 @@
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('se4', 'dashboarddesign', this)">Dashboard Design</li>
           <li class="week-doc-item" onclick="showDoc('se4', 'dashboard', this)">Building the Dashboard</li>
-          <li class="week-doc-item" onclick="showDoc('se4', 'codedeepdive', this)">Code Deep Dive</li>
+          <li class="week-doc-item" onclick="showDoc('se4', 'codedeepdive', this)">Code Deep Dive<span class="new-badge">Updated</span></li>
           <li class="week-doc-item" onclick="showDoc('se4', 'glassmorphism', this)">Glass-morphism Design Update</li>
         </ul>
       </div>
@@ -358,59 +362,61 @@
 
         <div class="doc-content" id="se4-codedeepdive">
           <p class="week-sub">Code Deep Dive — Dashboard Map</p>
-          <p class="week-reflection-body">The following is a breakdown of the key parts of the dashboard map I built. I chose to go into detail on these specific sections because together they tell the full story of how the map works, from setting it up in the browser, to connecting to the database, to fetching the right data, to rendering it all visually on screen.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">Each section covers a different layer of the component. Some are about technical setup, some are about solving specific problems like overlapping pins, and some are about making design decisions in code like the custom Terra pin. The goal is to show not just what I built but why each part is there and how they all connect to make the map work as one thing.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">This breakdown is based on commit <span class="code-inline">b3b1b22c</span>.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Client Rendering <span style="font-weight: 400;">— Line 1</span></p>
-          <pre class="doc-code">'use client';</pre>
-          <p class="week-reflection-body">The very first line of the file. In Next.js components run on the server by default, meaning they get rendered before they even reach the browser. But a map cannot work on a server. It needs the browser to render the tiles, handle the clicks and interact with the user. Adding <span class="code-inline">'use client'</span> at the top tells Next.js to run this component in the browser instead. Without it the whole map would break.</p>
+          <div class="arch-version active" id="codedive-v1">
+            <p class="week-reflection-body">The following is a breakdown of the key parts of the dashboard map I built. I chose to go into detail on these specific sections because together they tell the full story of how the map works, from setting it up in the browser, to connecting to the database, to fetching the right data, to rendering it all visually on screen.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">Each section covers a different layer of the component. Some are about technical setup, some are about solving specific problems like overlapping pins, and some are about making design decisions in code like the custom Terra pin. The goal is to show not just what I built but why each part is there and how they all connect to make the map work as one thing.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This breakdown is based on commit <span class="code-inline">b3b1b22c</span>.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Leaflet Imports <span style="font-weight: 400;">— Lines 4-6</span></p>
-          <pre class="doc-code">import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+            <hr class="doc-divider">
+            <p class="doc-subhead">Client Rendering <span style="font-weight: 400;">— Line 1</span></p>
+            <pre class="doc-code">'use client';</pre>
+            <p class="week-reflection-body">The very first line of the file. In Next.js components run on the server by default, meaning they get rendered before they even reach the browser. But a map cannot work on a server. It needs the browser to render the tiles, handle the clicks and interact with the user. Adding <span class="code-inline">'use client'</span> at the top tells Next.js to run this component in the browser instead. Without it the whole map would break.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Leaflet Imports <span style="font-weight: 400;">— Lines 4-6</span></p>
+            <pre class="doc-code">import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';</pre>
-          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 4</strong> imports the core React Leaflet components:</p>
-          <ul class="week-list-body">
-            <li><span class="code-inline">MapContainer</span> is the wrapper that renders the actual map on the page</li>
-            <li><span class="code-inline">TileLayer</span> loads the map tiles from OpenStreetMap, the visual layer you see</li>
-            <li><span class="code-inline">Marker</span> places a pin on the map at a specific coordinate</li>
-            <li><span class="code-inline">Popup</span> shows a small info bubble when you click a marker</li>
-          </ul>
-          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 5</strong> imports <span class="code-inline">L</span>, the core Leaflet library. This is used to create and customize the pin icons so they match the Terra brand instead of using the default Leaflet pins.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 6</strong> imports Leaflet's CSS. This one is easy to forget but critical. Without it the map renders completely broken with no styling, overlapping tiles and misaligned controls.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 4</strong> imports the core React Leaflet components:</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">MapContainer</span> is the wrapper that renders the actual map on the page</li>
+              <li><span class="code-inline">TileLayer</span> loads the map tiles from OpenStreetMap, the visual layer you see</li>
+              <li><span class="code-inline">Marker</span> places a pin on the map at a specific coordinate</li>
+              <li><span class="code-inline">Popup</span> shows a small info bubble when you click a marker</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 5</strong> imports <span class="code-inline">L</span>, the core Leaflet library. This is used to create and customize the pin icons so they match the Terra brand instead of using the default Leaflet pins.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 6</strong> imports Leaflet's CSS. This one is easy to forget but critical. Without it the map renders completely broken with no styling, overlapping tiles and misaligned controls.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Supabase Client <span style="font-weight: 400;">— Lines 20-23</span></p>
-          <pre class="doc-code">const supabase = createClient(
+            <hr class="doc-divider">
+            <p class="doc-subhead">Supabase Client <span style="font-weight: 400;">— Lines 20-23</span></p>
+            <pre class="doc-code">const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );</pre>
-          <p class="week-reflection-body">This is basically logging into the database. You need two things to get in, the address of the database and a key to access it. Instead of writing those directly into the code where anyone could see them, they live in a separate <span class="code-inline">.env</span> file that never gets shared or pushed to Git.</p>
+            <p class="week-reflection-body">This is basically logging into the database. You need two things to get in, the address of the database and a key to access it. Instead of writing those directly into the code where anyone could see them, they live in a separate <span class="code-inline">.env</span> file that never gets shared or pushed to Git.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Custom Map Pin <span style="font-weight: 400;">— Lines 28-34</span></p>
-          <pre class="doc-code">function makeIcon() {
+            <hr class="doc-divider">
+            <p class="doc-subhead">Custom Map Pin <span style="font-weight: 400;">— Lines 28-34</span></p>
+            <pre class="doc-code">function makeIcon() {
   const svg = `&lt;svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40"&gt;
     &lt;path d="M14 0C6.27 0 0 6.27 0 14c0 9.625 14 26 14 26S28 23.625 28 14C28 6.27 21.73 0 14 0z" fill="${PIN_COLOUR}"/&gt;
     &lt;circle cx="14" cy="14" r="5.5" fill="white"/&gt;
   &lt;/svg&gt;`;
   return L.divIcon({ html: svg, className: '', iconSize: [28, 40], iconAnchor: [14, 40], popupAnchor: [0, -40] });
 }</pre>
-          <p class="week-reflection-body">The default Leaflet pin is blue and generic so I wanted something that matched Terra. Instead of using an image file, the pin is built directly in SVG inside the code. It has two shapes, a dark green teardrop using Terra's <span class="code-inline">#2E4A2A</span> for the body and a white circle in the middle.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">L.divIcon</span> takes that SVG and turns it into an actual map pin Leaflet can use. A few things worth noting:</p>
-          <ul class="week-list-body">
-            <li><span class="code-inline">iconSize: [28, 40]</span> — the pin is 28px wide and 40px tall</li>
-            <li><span class="code-inline">iconAnchor: [14, 40]</span> — the very tip of the pin sits exactly on the coordinates so it points to the right spot on the map</li>
-            <li><span class="code-inline">popupAnchor: [0, -40]</span> — makes the popup appear above the pin so it does not cover it</li>
-          </ul>
-          <p class="week-reflection-body" style="margin-top:1rem;">Every single pin on the map comes from this one function.</p>
+            <p class="week-reflection-body">The default Leaflet pin is blue and generic so I wanted something that matched Terra. Instead of using an image file, the pin is built directly in SVG inside the code. It has two shapes, a dark green teardrop using Terra's <span class="code-inline">#2E4A2A</span> for the body and a white circle in the middle.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">L.divIcon</span> takes that SVG and turns it into an actual map pin Leaflet can use. A few things worth noting:</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">iconSize: [28, 40]</span> — the pin is 28px wide and 40px tall</li>
+              <li><span class="code-inline">iconAnchor: [14, 40]</span> — the very tip of the pin sits exactly on the coordinates so it points to the right spot on the map</li>
+              <li><span class="code-inline">popupAnchor: [0, -40]</span> — makes the popup appear above the pin so it does not cover it</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">Every single pin on the map comes from this one function.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Pin Spreading <span style="font-weight: 400;">— Lines 36-55</span></p>
-          <pre class="doc-code">function spreadPins(pins: Entry[]) {
+            <hr class="doc-divider">
+            <p class="doc-subhead">Pin Spreading <span style="font-weight: 400;">— Lines 36-55</span></p>
+            <pre class="doc-code">function spreadPins(pins: Entry[]) {
   const groups: Record&lt;string, Entry[]&gt; = {};
   for (const pin of pins) {
     const key = `${pin.latitude},${pin.longitude}`;
@@ -430,34 +436,34 @@ import 'leaflet/dist/leaflet.css';</pre>
     };
   });
 }</pre>
-          <p class="week-reflection-body">This one solved a problem I did not even think about until it became obvious. In an arboretum multiple people can submit an observation at the exact same GPS location. Two people logging the same tree for example. If you just drop two pins on the same coordinates they stack on top of each other and you would never know the second one exists.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">This function fixes that. It first groups all pins by their coordinates. If a location only has one pin it stays exactly where it is. If there are multiple pins at the same spot it fans them out in a small circle around the original point using <span class="code-inline">Math.cos</span> and <span class="code-inline">Math.sin</span> to calculate evenly spaced positions. <span class="code-inline">OFFSET_RADIUS</span> controls how far apart they spread, just a few meters in real distance so it looks natural on the map.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">The result is that instead of pins hiding behind each other they appear as a small visible cluster, all individually clickable.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;"><em>what it looks like</em></p>
-          <img src="img/pin_cluster_V0.png" alt="Pins fanned out into a visible cluster" class="doc-img" onclick="openLightbox('img/pin_cluster_V0.png')" style="cursor:pointer;">
+            <p class="week-reflection-body">This one solved a problem I did not even think about until it became obvious. In an arboretum multiple people can submit an observation at the exact same GPS location. Two people logging the same tree for example. If you just drop two pins on the same coordinates they stack on top of each other and you would never know the second one exists.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This function fixes that. It first groups all pins by their coordinates. If a location only has one pin it stays exactly where it is. If there are multiple pins at the same spot it fans them out in a small circle around the original point using <span class="code-inline">Math.cos</span> and <span class="code-inline">Math.sin</span> to calculate evenly spaced positions. <span class="code-inline">OFFSET_RADIUS</span> controls how far apart they spread, just a few meters in real distance so it looks natural on the map.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">The result is that instead of pins hiding behind each other they appear as a small visible cluster, all individually clickable.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><em>what it looks like</em></p>
+            <img src="img/pin_cluster_V0.png" alt="Pins fanned out into a visible cluster" class="doc-img" onclick="openLightbox('img/pin_cluster_V0.png')" style="cursor:pointer;">
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Loading the Data <span style="font-weight: 400;">— Lines 72-77</span></p>
-          <pre class="doc-code">useEffect(() =&gt; {
+            <hr class="doc-divider">
+            <p class="doc-subhead">Loading the Data <span style="font-weight: 400;">— Lines 72-77</span></p>
+            <pre class="doc-code">useEffect(() =&gt; {
   supabase.rpc('get_entries_by_status', { p_status: 'approved' }).then(({ data }) =&gt; {
     const rows = (Array.isArray(data) ? data : []) as Entry[];
     setEntries(rows.filter(e =&gt; e.latitude != null &amp;&amp; e.longitude != null));
   });
 }, []);</pre>
-          <p class="week-reflection-body">This is what actually makes the map load with data. <span class="code-inline">useEffect</span> is a React hook that runs code at a specific moment. The <span class="code-inline">[]</span> at the end means it runs once, right when the page loads. Think of it as "when the map opens, do this."</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">Here is what happens in order:</p>
-          <ul class="week-list-body">
-            <li>It calls Supabase to fetch all approved observations from the database</li>
-            <li>When the data comes back it checks it is actually an array, if not it defaults to empty so nothing breaks</li>
-            <li>It then filters out any entries that are missing coordinates because you cannot place a pin on a map without a latitude and longitude</li>
-            <li>Finally it stores the clean results using <span class="code-inline">setEntries</span> which triggers the map to re-render with all the pins in place</li>
-          </ul>
-          <p class="week-reflection-body" style="margin-top:1rem;">Without this the database call would never happen and the map would just be an empty map with no pins. This is the trigger that kicks off the whole data flow the moment the page loads.</p>
-          <p class="week-reflection-body" style="margin-top:1rem;">The reason it fetches the data this way is security. Instead of writing a full database query from scratch, <span class="code-inline">rpc</span> calls a function that already lives inside Supabase, <span class="code-inline">get_entries_by_status</span>, which runs with <span class="code-inline">SECURITY DEFINER</span>. This means Supabase controls exactly what data gets returned, so you cannot accidentally pull data you are not supposed to see.</p>
+            <p class="week-reflection-body">This is what actually makes the map load with data. <span class="code-inline">useEffect</span> is a React hook that runs code at a specific moment. The <span class="code-inline">[]</span> at the end means it runs once, right when the page loads. Think of it as "when the map opens, do this."</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">Here is what happens in order:</p>
+            <ul class="week-list-body">
+              <li>It calls Supabase to fetch all approved observations from the database</li>
+              <li>When the data comes back it checks it is actually an array, if not it defaults to empty so nothing breaks</li>
+              <li>It then filters out any entries that are missing coordinates because you cannot place a pin on a map without a latitude and longitude</li>
+              <li>Finally it stores the clean results using <span class="code-inline">setEntries</span> which triggers the map to re-render with all the pins in place</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">Without this the database call would never happen and the map would just be an empty map with no pins. This is the trigger that kicks off the whole data flow the moment the page loads.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">The reason it fetches the data this way is security. Instead of writing a full database query from scratch, <span class="code-inline">rpc</span> calls a function that already lives inside Supabase, <span class="code-inline">get_entries_by_status</span>, which runs with <span class="code-inline">SECURITY DEFINER</span>. This means Supabase controls exactly what data gets returned, so you cannot accidentally pull data you are not supposed to see.</p>
 
-          <hr class="doc-divider">
-          <p class="doc-subhead">Rendering the Map <span style="font-weight: 400;">— Lines 106-117</span></p>
-          <pre class="doc-code">&lt;MapContainer center={CENTRE} zoom={15} style={{ height: '100%', width: '100%' }} zoomControl&gt;
+            <hr class="doc-divider">
+            <p class="doc-subhead">Rendering the Map <span style="font-weight: 400;">— Lines 106-117</span></p>
+            <pre class="doc-code">&lt;MapContainer center={CENTRE} zoom={15} style={{ height: '100%', width: '100%' }} zoomControl&gt;
   &lt;TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={19} /&gt;
   {spreadPins(filtered).map(e =&gt; (
     &lt;Marker key={e.entry_id} position={[e._lat, e._lng]} icon={icon}&gt;
@@ -469,21 +475,156 @@ import 'leaflet/dist/leaflet.css';</pre>
     &lt;/Marker&gt;
   ))}
 &lt;/MapContainer&gt;</pre>
-          <p class="week-reflection-body">This is where everything comes together. All the functions written above get used here in one block.</p>
-          <ul class="week-list-body">
-            <li><span class="code-inline">MapContainer</span> is the map wrapper. It opens centred on the arboretum, starts at zoom level 15 which is street level and fills the full screen.</li>
-            <li><span class="code-inline">TileLayer</span> loads the actual OpenStreetMap imagery inside the container. The streets, labels and landscape you see behind the pins all come from here.</li>
-            <li><span class="code-inline">spreadPins(filtered).map</span> takes the filtered entries after search, runs them through <span class="code-inline">spreadPins</span> to handle any overlapping coordinates and then loops through each one to place it on the map.</li>
-            <li><span class="code-inline">Marker</span> drops a pin for each entry at its exact coordinates using the custom Terra pin from <span class="code-inline">makeIcon()</span>.</li>
-            <li><span class="code-inline">Popup</span> is the info bubble that appears when you click a pin. It shows the entry name, the element type with underscores cleaned up, the classification if it has one, who submitted it and how long ago using <span class="code-inline">timeAgo()</span>.</li>
-          </ul>
-          <p class="week-reflection-body" style="margin-top:1rem;">This block is basically the payoff of all the setup. The database fetch, the custom icon, the spread logic and the search filter all feed into these 12 lines.</p>
-          <hr class="doc-divider">
-          <p class="week-reflection-body" style="margin-top:1rem;"><em>version 0 of the dashboard in action</em></p>
-          <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
-            <source src="img/dashboard_v1.mp4" type="video/mp4">
-          </video>
-          <p class="week-reflection-body" style="margin-top:1rem;">This was the first working version of the dashboard, which I kept iterating on afterwards, refining the design and layout into the final version the team delivered.</p>
+            <p class="week-reflection-body">This is where everything comes together. All the functions written above get used here in one block.</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">MapContainer</span> is the map wrapper. It opens centred on the arboretum, starts at zoom level 15 which is street level and fills the full screen.</li>
+              <li><span class="code-inline">TileLayer</span> loads the actual OpenStreetMap imagery inside the container. The streets, labels and landscape you see behind the pins all come from here.</li>
+              <li><span class="code-inline">spreadPins(filtered).map</span> takes the filtered entries after search, runs them through <span class="code-inline">spreadPins</span> to handle any overlapping coordinates and then loops through each one to place it on the map.</li>
+              <li><span class="code-inline">Marker</span> drops a pin for each entry at its exact coordinates using the custom Terra pin from <span class="code-inline">makeIcon()</span>.</li>
+              <li><span class="code-inline">Popup</span> is the info bubble that appears when you click a pin. It shows the entry name, the element type with underscores cleaned up, the classification if it has one, who submitted it and how long ago using <span class="code-inline">timeAgo()</span>.</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">This block is basically the payoff of all the setup. The database fetch, the custom icon, the spread logic and the search filter all feed into these 12 lines.</p>
+            <hr class="doc-divider">
+            <p class="week-reflection-body" style="margin-top:1rem;"><em>version 0 of the dashboard in action</em></p>
+            <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+              <source src="img/dashboard_v1.mp4" type="video/mp4">
+            </video>
+            <p class="week-reflection-body" style="margin-top:1rem;">This was the first working version of the dashboard, which I kept iterating on afterwards, refining the design and layout into the final version the team delivered.</p>
+          </div>
+
+          <div class="arch-version" id="codedive-v2">
+            <p class="week-reflection-body">The following is a breakdown of the key parts of the dashboard map I built. I chose to go into detail on these specific sections because together they tell the full story of how the map works, from setting it up in the browser, to connecting to the database, to fetching the right data, to rendering it all visually on screen.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">These six sections are not independent. They form a dependency chain where each piece relies on the one before it. The Supabase client creates the connection to the database. <span class="code-inline">useEffect</span> uses that client to fetch the observation data when the page loads. <span class="code-inline">setEntries</span> stores that data in state. <span class="code-inline">spreadPins</span> takes the stored entries and processes their coordinates so overlapping pins do not stack. <span class="code-inline">makeIcon</span> builds the custom Terra pin that gets applied to each marker. And <span class="code-inline">MapContainer</span> brings everything together, taking the spread pins, applying the icon and rendering the final map on screen. Remove any one of these and the map either breaks completely, shows nothing or looks wrong.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">Each section covers a different layer of the component. Some are about technical setup, some are about solving specific problems like overlapping pins, and some are about making design decisions in code like the custom Terra pin. The goal is to show not just what I built but why each part is there and how they all connect to make the map work as one thing.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This breakdown is based on commit <span class="code-inline">b3b1b22c</span>.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Client Rendering <span style="font-weight: 400;">— Line 1</span></p>
+            <pre class="doc-code">'use client';</pre>
+            <p class="week-reflection-body">The very first line of the file. In Next.js components run on the server by default, meaning they get rendered before they even reach the browser. But a map cannot work on a server. It needs the browser to render the tiles, handle the clicks and interact with the user. Adding <span class="code-inline">'use client'</span> at the top tells Next.js to run this component in the browser instead. Without it the whole map would break.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This is the first dependency in the chain. Everything else in this file only works because this line forces it to run in the browser.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Leaflet Imports <span style="font-weight: 400;">— Lines 4-6</span></p>
+            <pre class="doc-code">import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';</pre>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 4</strong> imports the core React Leaflet components:</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">MapContainer</span> is the wrapper that renders the actual map on the page</li>
+              <li><span class="code-inline">TileLayer</span> loads the map tiles from OpenStreetMap, the visual layer you see</li>
+              <li><span class="code-inline">Marker</span> places a pin on the map at a specific coordinate</li>
+              <li><span class="code-inline">Popup</span> shows a small info bubble when you click a marker</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 5</strong> imports <span class="code-inline">L</span>, the core Leaflet library. This is used to create and customize the pin icons so they match the Terra brand instead of using the default Leaflet pins.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><strong>Line 6</strong> imports Leaflet's CSS. This one is easy to forget but critical. Without it the map renders completely broken with no styling, overlapping tiles and misaligned controls.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">These imports are what make the map renderable. They depend on the component running in the browser from Line 1. The next dependency is the database connection that will feed data into these components.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Supabase Client <span style="font-weight: 400;">— Lines 20-23</span></p>
+            <pre class="doc-code">const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);</pre>
+            <p class="week-reflection-body">This is basically logging into the database. You need two things to get in, the address of the database and a key to access it. Instead of writing those directly into the code where anyone could see them, they live in a separate <span class="code-inline">.env</span> file that never gets shared or pushed to Git.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This is the connection that makes data fetching possible. Without it <span class="code-inline">useEffect</span> has nowhere to fetch from. The next step is building the custom pin that will be placed on each data point once the data arrives.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Custom Map Pin <span style="font-weight: 400;">— Lines 28-34</span></p>
+            <pre class="doc-code">function makeIcon() {
+  const svg = `&lt;svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40"&gt;
+    &lt;path d="M14 0C6.27 0 0 6.27 0 14c0 9.625 14 26 14 26S28 23.625 28 14C28 6.27 21.73 0 14 0z" fill="${PIN_COLOUR}"/&gt;
+    &lt;circle cx="14" cy="14" r="5.5" fill="white"/&gt;
+  &lt;/svg&gt;`;
+  return L.divIcon({ html: svg, className: '', iconSize: [28, 40], iconAnchor: [14, 40], popupAnchor: [0, -40] });
+}</pre>
+            <p class="week-reflection-body">The default Leaflet pin is blue and generic so I wanted something that matched Terra. Instead of using an image file, the pin is built directly in SVG inside the code. It has two shapes, a dark green teardrop using Terra's <span class="code-inline">#2E4A2A</span> for the body and a white circle in the middle.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">L.divIcon</span> takes that SVG and turns it into an actual map pin Leaflet can use:</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">iconSize: [28, 40]</span> — the pin is 28px wide and 40px tall</li>
+              <li><span class="code-inline">iconAnchor: [14, 40]</span> — the very tip of the pin sits exactly on the coordinates so it points to the right spot on the map</li>
+              <li><span class="code-inline">popupAnchor: [0, -40]</span> — makes the popup appear above the pin so it does not cover it</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">Every single pin on the map comes from this one function.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This function depends on <span class="code-inline">L</span> from the Leaflet import. It produces the icon that <span class="code-inline">MapContainer</span> will apply to every Marker. Before the markers can be placed though, the data needs to be fetched and the coordinates need to be processed.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Pin Spreading <span style="font-weight: 400;">— Lines 36-55</span></p>
+            <pre class="doc-code">function spreadPins(pins: Entry[]) {
+  const groups: Record&lt;string, Entry[]&gt; = {};
+  for (const pin of pins) {
+    const key = `${pin.latitude},${pin.longitude}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(pin);
+  }
+  return pins.map(pin =&gt; {
+    const key = `${pin.latitude},${pin.longitude}`;
+    const group = groups[key];
+    if (group.length === 1) return { ...pin, _lat: pin.latitude, _lng: pin.longitude };
+    const idx = group.indexOf(pin);
+    const angle = (2 * Math.PI * idx) / group.length;
+    return {
+      ...pin,
+      _lat: pin.latitude  + OFFSET_RADIUS * Math.cos(angle),
+      _lng: pin.longitude + OFFSET_RADIUS * Math.sin(angle),
+    };
+  });
+}</pre>
+            <p class="week-reflection-body">This one solved a problem I did not even think about until it became obvious. In an arboretum multiple people can submit an observation at the exact same GPS location. Two people logging the same tree for example. If you just drop two pins on the same coordinates they stack on top of each other and you would never know the second one exists.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This function fixes that. It first groups all pins by their coordinates. If a location only has one pin it stays exactly where it is. If there are multiple pins at the same spot it fans them out in a small circle around the original point using <span class="code-inline">Math.cos</span> and <span class="code-inline">Math.sin</span> to calculate evenly spaced positions. <span class="code-inline">OFFSET_RADIUS</span> controls how far apart they spread, just a few meters in real distance so it looks natural on the map.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;"><em>what it looks like</em></p>
+            <img src="img/pin_cluster_V0.png" alt="Pins fanned out into a visible cluster" class="doc-img" onclick="openLightbox('img/pin_cluster_V0.png')" style="cursor:pointer;">
+            <p class="week-reflection-body" style="margin-top:1rem;">This function depends on the entries fetched by <span class="code-inline">useEffect</span> and stored in state. It takes that data and prepares the coordinates for <span class="code-inline">MapContainer</span> to render. Without the data from <span class="code-inline">useEffect</span> this function has nothing to process.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Loading the Data <span style="font-weight: 400;">— Lines 72-77</span></p>
+            <pre class="doc-code">useEffect(() =&gt; {
+  supabase.rpc('get_entries_by_status', { p_status: 'approved' }).then(({ data }) =&gt; {
+    const rows = (Array.isArray(data) ? data : []) as Entry[];
+    setEntries(rows.filter(e =&gt; e.latitude != null &amp;&amp; e.longitude != null));
+  });
+}, []);</pre>
+            <p class="week-reflection-body">This is what actually makes the map load with data. <span class="code-inline">useEffect</span> is a React hook that runs code at a specific moment. The <span class="code-inline">[]</span> at the end means it runs once, right when the page loads.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">Here is what happens in order:</p>
+            <ul class="week-list-body">
+              <li>It calls Supabase to fetch all approved observations from the database</li>
+              <li>When the data comes back it checks it is actually an array, if not it defaults to empty so nothing breaks</li>
+              <li>It then filters out any entries that are missing coordinates because you cannot place a pin on a map without a latitude and longitude</li>
+              <li>Finally it stores the clean results using <span class="code-inline">setEntries</span> which triggers the map to re-render with all the pins in place</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">The reason it fetches data this way is security. Instead of writing a raw database query, <span class="code-inline">rpc</span> calls a function that already lives inside Supabase called <span class="code-inline">get_entries_by_status</span>, which runs with <span class="code-inline">SECURITY DEFINER</span>. This means Supabase controls exactly what data gets returned so you cannot accidentally pull data you are not supposed to see.</p>
+            <p class="week-reflection-body" style="margin-top:1rem;">This is the step that connects the Supabase client to the rest of the component. It depends on the client from Lines 20-23 to make the call, and the data it returns gets processed by <span class="code-inline">spreadPins</span> and rendered by <span class="code-inline">MapContainer</span>.</p>
+
+            <hr class="doc-divider">
+            <p class="doc-subhead">Rendering the Map <span style="font-weight: 400;">— Lines 106-117</span></p>
+            <pre class="doc-code">&lt;MapContainer center={CENTRE} zoom={15} style={{ height: '100%', width: '100%' }} zoomControl&gt;
+  &lt;TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={19} /&gt;
+  {spreadPins(filtered).map(e =&gt; (
+    &lt;Marker key={e.entry_id} position={[e._lat, e._lng]} icon={icon}&gt;
+      &lt;Popup&gt;
+        &lt;strong&gt;{e.name}&lt;/strong&gt;&lt;br /&gt;
+        {e.element_type?.replace(/_/g, ' ')}{e.classification ? ` · ${e.classification}` : ''}&lt;br /&gt;
+        {e.observer &amp;&amp; &lt;&gt;{e.observer} · &lt;/&gt;}{timeAgo(e.created_at)}
+      &lt;/Popup&gt;
+    &lt;/Marker&gt;
+  ))}
+&lt;/MapContainer&gt;</pre>
+            <p class="week-reflection-body">This is where everything comes together. All the functions and setup from above get used here in one block.</p>
+            <ul class="week-list-body">
+              <li><span class="code-inline">MapContainer</span> is the map wrapper. It opens centred on the arboretum, starts at zoom level 15 which is street level and fills the full screen. It depends on the Leaflet imports from Lines 4-6.</li>
+              <li><span class="code-inline">TileLayer</span> loads the actual OpenStreetMap imagery inside the container. The streets, labels and landscape you see behind the pins all come from here.</li>
+              <li><span class="code-inline">spreadPins(filtered).map</span> takes the filtered entries after search, runs them through <span class="code-inline">spreadPins</span> to handle any overlapping coordinates and then loops through each one to place it on the map. It depends on both <span class="code-inline">useEffect</span> having fetched the data and <span class="code-inline">spreadPins</span> having processed the coordinates.</li>
+              <li><span class="code-inline">Marker</span> drops a pin for each entry at its exact coordinates using the custom Terra pin from <span class="code-inline">makeIcon()</span>. It depends on <span class="code-inline">makeIcon</span> to produce the icon.</li>
+              <li><span class="code-inline">Popup</span> is the info bubble that appears when you click a pin. It shows the entry name, the element type with underscores cleaned up, the classification if it has one, who submitted it and how long ago using <span class="code-inline">timeAgo()</span>.</li>
+            </ul>
+            <p class="week-reflection-body" style="margin-top:1rem;">This block is the payoff of the entire chain. The <span class="code-inline">'use client'</span> declaration lets it run in the browser. The Leaflet imports provide the map components. The Supabase client connects to the database. <span class="code-inline">useEffect</span> fetches the data. <span class="code-inline">spreadPins</span> processes the coordinates. <span class="code-inline">makeIcon</span> builds the pin. And <span class="code-inline">MapContainer</span> renders it all on screen. Every single piece is needed for the map to work.</p>
+            <hr class="doc-divider">
+            <p class="week-reflection-body" style="margin-top:1rem;"><em>version 0 of the dashboard in action</em></p>
+            <video class="doc-img" autoplay loop muted playsinline controls style="display:block;">
+              <source src="img/dashboard_v1.mp4" type="video/mp4">
+            </video>
+            <p class="week-reflection-body" style="margin-top:1rem;">This was the first working version of the dashboard, which I kept iterating on afterwards, refining the design and layout into the final version the team delivered.</p>
+          </div>
         </div>
 
         <div class="doc-content" id="se4-glassmorphism">
@@ -910,8 +1051,8 @@ app.UseSwaggerUI();</pre>
     <div class="week-panel-header" style="display:flex; align-items:center; justify-content:space-between;">
       <h2 class="week-panel-title">Week 2</h2>
       <div class="version-switch" style="margin-bottom:0;">
-        <button class="version-switch-btn active" id="arch-switch-v1" onclick="setArchVersion('v1')">Version 1</button>
-        <button class="version-switch-btn" id="arch-switch-v2" onclick="setArchVersion('v2')">Version 2</button>
+        <button class="version-switch-btn active" id="arch-switch-v1" onclick="setVersion('arch','v1')">Version 1</button>
+        <button class="version-switch-btn" id="arch-switch-v2" onclick="setVersion('arch','v2')">Version 2</button>
       </div>
     </div>
     <div class="week-panel-body">
@@ -1112,11 +1253,11 @@ app.UseSwaggerUI();</pre>
 </div>
 
 <script>
-function setArchVersion(version) {
-  document.getElementById('arch-v1').classList.toggle('active', version === 'v1');
-  document.getElementById('arch-v2').classList.toggle('active', version === 'v2');
-  document.getElementById('arch-switch-v1').classList.toggle('active', version === 'v1');
-  document.getElementById('arch-switch-v2').classList.toggle('active', version === 'v2');
+function setVersion(prefix, version) {
+  document.getElementById(prefix + '-v1').classList.toggle('active', version === 'v1');
+  document.getElementById(prefix + '-v2').classList.toggle('active', version === 'v2');
+  document.getElementById(prefix + '-switch-v1').classList.toggle('active', version === 'v1');
+  document.getElementById(prefix + '-switch-v2').classList.toggle('active', version === 'v2');
 }
 function openLightbox(src) {
   document.getElementById('lightbox-img').src = src;
