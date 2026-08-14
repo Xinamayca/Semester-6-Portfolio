@@ -218,6 +218,7 @@ section { padding: 5rem 3rem; position: relative; }
 .week-tab { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; padding: .75rem 2rem; border: none; background: none; color: var(--muted); cursor: none; border-bottom: 3px solid transparent; transition: all .2s; position: relative; top: 1px; }
 .week-tab:hover { color: var(--black); }
 .week-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: white; }
+.new-badge { font-family: 'Epilogue', sans-serif; font-size: 10px; letter-spacing: .5px; font-weight: 600; text-transform: uppercase; color: var(--blue); background: var(--blue-light); padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; position: relative; top: -1px; }
 
 .week-panel { display: none; background: white; border: 1px solid var(--border); border-top: none; }
 .week-panel.active { display: block; }

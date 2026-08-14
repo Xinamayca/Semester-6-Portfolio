@@ -53,7 +53,7 @@
     <button class="week-tab" onclick="showWeekSE(3, this)">Week 3</button>
     <button class="week-tab" onclick="showWeekSE(4, this)">Week 4</button>
     <button class="week-tab" onclick="showWeekSE(5, this)">Week 5</button>
-    <button class="week-tab" onclick="showWeekSE('labs', this)">Lab Exercises</button>
+    <button class="week-tab" onclick="showWeekSE('labs', this)">Lab Exercises<span class="new-badge">New</span></button>
     <button class="week-tab" onclick="showWeekSE('reflection', this)">Reflection</button>
   </div>
 
@@ -725,6 +725,7 @@ setTimeout(retry, 200)</pre>
         <p class="week-docs-label">Deliverables</p>
         <ul class="week-doc-list">
           <li class="week-doc-item active" onclick="showDoc('selabs', 'lab6', this)">Lab 6 — Contact Management API</li>
+          <li class="week-doc-item" onclick="showDoc('selabs', 'lab10', this)">Lab 10 — PostgreSQL Integration</li>
         </ul>
       </div>
       <div class="week-reflection">
@@ -733,7 +734,17 @@ setTimeout(retry, 200)</pre>
           <p class="week-reflection-body">This lab was the first of three progressive exercises building a Contact Management REST API in ASP.NET Core. The goal was to build a working API that can create, read, update and delete contacts with all data stored in memory. I had never worked with C# or anything API related before so I used AI to help me understand the steps and generate a guide to work from.</p>
 
           <p class="week-sub">How</p>
-          <p class="week-reflection-body">I created the project using <span class="code-inline">dotnet new webapi</span> in the terminal and built it following a clean structure of Controller, Repository and Model. I used an interface called <span class="code-inline">IContactRepository</span> to abstract the storage so the controller never touches the data directly, it just calls the repository. The actual data is stored in a simple list in memory using <span class="code-inline">InMemoryContactRepository</span> with an auto incrementing ID counter. The repository was registered as a singleton in <span class="code-inline">Program.cs</span> so the same list persists across all requests for the lifetime of the app.</p>
+          <p class="week-reflection-body">Before writing a single line of code I created a diagram to map out the structure of what I was going to build. This helped me understand how the pieces connected before I started. The diagram shows the full flow from the HTTP client down to where the data is actually stored.</p>
+          <img src="img/lab6_contact_api_architecture.png" alt="Lab 6 architecture diagram: HTTP Client to ContactsController to IContactRepository to InMemoryContactRepository to the in-memory list" class="doc-img" onclick="openLightbox('img/lab6_contact_api_architecture.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">The tech stack for this lab:</p>
+          <ul class="week-list-body">
+            <li><strong>ASP.NET Core</strong> — the framework used to build the API</li>
+            <li><strong>C#</strong> — the programming language, my second time working with it</li>
+            <li><strong>.NET 7</strong> — the runtime version installed on my machine</li>
+            <li><strong>curl</strong> — used to test the API directly in the terminal</li>
+            <li><strong>VS Code</strong> — the code editor</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">I created the project using <span class="code-inline">dotnet new webapi</span> in the terminal and built it following a clean structure of Controller, Repository and Model. I used an interface called <span class="code-inline">IContactRepository</span> to abstract the storage so the controller never touches the data directly, it just calls the repository. The actual data is stored in a simple list in memory using <span class="code-inline">InMemoryContactRepository</span> with an auto incrementing ID counter. The repository was registered as a singleton in <span class="code-inline">Program.cs</span> so the same list persists across all requests for the lifetime of the app.</p>
 
           <p class="week-sub">What</p>
           <p class="week-reflection-body">The controller exposes the full CRUD surface at <span class="code-inline">api/contacts</span>:</p>
@@ -747,12 +758,102 @@ setTimeout(retry, 200)</pre>
           <img src="img/Lab_6.png" alt="Lab 6 CRUD flow via curl" class="doc-img" onclick="openLightbox('img/Lab_6.png')" style="cursor:pointer;">
           <div class="doc-btn-row" style="margin-top:1rem;">
             <a href="Lab_6_ContactManagement.zip" download class="doc-btn">Download Lab 6 Source (.zip)</a>
+            <a href="lab6-guide.pdf" target="_blank" class="doc-btn">Lab 6 Guide (PDF)</a>
           </div>
           <p class="week-reflection-body" style="margin-top:1rem;">I tested everything using <span class="code-inline">curl</span> in the terminal. The screenshot above shows the full flow in action, creating a contact, fetching it, updating it, deleting it and confirming it returns 404 afterwards. I even added myself as a contact which felt appropriate.</p>
           <p class="week-reflection-body" style="margin-top:1rem;">I ran into a few issues along the way. The machine had .NET 7 installed instead of .NET 8 which the guide assumed but this was not a blocker. The VS Code GUI could not find the SDK so I created the project via the terminal instead. VS Code also showed compile errors about a missing Models namespace which turned out to be because I had never created the model file yet. And I used the wrong port number from the guide instead of reading the actual port the app printed. All small things but good learning moments.</p>
 
+          <p class="week-sub">Plain Language Explanation</p>
+          <p class="week-reflection-body">A small program that keeps a list of contacts, name, email and phone, and lets you add, view, change or remove them by sending it simple requests. The same idea as a phone contacts app, just running as a program you talk to over the internet instead of tapping on a screen.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>The front desk</strong> (<span class="code-inline">ContactsController.cs</span>) is the part that receives every request. Think of it like the front desk at an office. Someone walks up and says "I'd like to add a new contact" or "show me contact 3" or "delete contact 3." The front desk understands what is being asked, checks it makes basic sense and passes the actual work along.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>The storage clerk</strong> (<span class="code-inline">InMemoryContactRepository.cs</span>) is the part that actually holds onto the contacts. It keeps a running list, hands out a new ID number to each new contact and does the real work of adding, finding, changing or removing an entry from that list.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The important design choice is that the front desk never touches the list directly. It always asks the storage clerk to do it. This means if you ever wanted to change how contacts are stored, like swapping to a real database which is exactly what Lab 10 does, you would only need to replace the storage clerk. The front desk would not need to change at all because it never knew any of the storage details in the first place.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The program responds with standard codes that any web app understands:</p>
+          <ul class="week-list-body">
+            <li><span class="code-inline">200</span> — here is the thing you asked for</li>
+            <li><span class="code-inline">201</span> — created successfully, here is the new item</li>
+            <li><span class="code-inline">204</span> — done, nothing more to show</li>
+            <li><span class="code-inline">400</span> — what you sent does not make sense</li>
+            <li><span class="code-inline">404</span> — nothing exists with that ID</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;">Everything is stored in memory only, meaning if the program is restarted the whole contact list is wiped and starts empty again. That is intentional for this exercise. The goal was to prove the logic works, not to build permanent storage yet.</p>
+
           <p class="week-sub">So What</p>
-          <p class="week-reflection-body">This was my second time working with C# and my first time with ASP.NET Core and honestly the structure made more sense than I expected. Controller, Repository and Model each have a clear responsibility and connect through interfaces, which reminded me of how components work in frontend development. I also learned about dependency injection for the first time. Most importantly I learned to read error messages carefully and always check the actual running environment rather than assuming what the guide says.</p>
+          <p class="week-reflection-body">This was my second time working with C# and my first time with ASP.NET Core. Everything in this lab was new to me. I had never built an API before, never worked with controllers or repositories, never heard of dependency injection and never used curl to test anything. The structure made more sense than I expected though. Controller, Repository and Model each having a clear responsibility reminded me of how components work in frontend development which made it easier to follow. Having a diagram from the start and AI to help explain things and generate a guide was also very helpful. I would not have been able to get through it without those tools. And now that the foundation is there I am ready to build upon it in Lab 10.</p>
+        </div>
+
+        <div class="doc-content" id="selabs-lab10">
+          <p class="week-sub">Why</p>
+          <p class="week-reflection-body">Lab 6 proved the logic worked but the data disappeared every time the app restarted because everything was stored in memory. Lab 10 replaced that with a real PostgreSQL database, moving the project from a working prototype to something closer to an actual backend. The good news was that the architecture from Lab 6 had already been designed for this. Because the CRUD operations were hidden behind the <span class="code-inline">IContactRepository</span> interface, the controller had no idea how data was being stored. That meant swapping in a real database only required writing one new class.</p>
+
+          <p class="week-sub">How</p>
+          <p class="week-reflection-body">Before writing any code I created a diagram to map out what was changing. The controller stays completely unchanged from Lab 6. The interface stays the same. The only thing that changes is what sits behind the interface, <span class="code-inline">InMemoryContactRepository</span> gets replaced by <span class="code-inline">PostgresContactRepository</span> which uses the Npgsql driver to run real SQL against a PostgreSQL database.</p>
+          <img src="img/lab10_technical_diagram.png" alt="Lab 10 architecture diagram: HTTP Client to ContactsController to IContactRepository to PostgresContactRepository to PostgreSQL running in Docker" class="doc-img" onclick="openLightbox('img/lab10_technical_diagram.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">The tech stack for this lab:</p>
+          <ul class="week-list-body">
+            <li><strong>ASP.NET Core</strong> — same framework as Lab 6</li>
+            <li><strong>C# with Npgsql</strong> — the library that lets C# talk to PostgreSQL, installed via <span class="code-inline">dotnet add package Npgsql --version 8.0.3</span></li>
+            <li><strong>PostgreSQL 16</strong> — the database, running in a Docker container</li>
+            <li><strong>Docker</strong> — used to run the PostgreSQL database locally</li>
+            <li><strong>dotnet user-secrets</strong> — used to store the database password safely outside of source control</li>
+          </ul>
+
+          <p class="week-sub">What</p>
+          <p class="week-reflection-body">I started PostgreSQL with Docker:</p>
+          <pre class="doc-code">docker run -d --name postgresdb \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -p 5432:5432 \
+  -v contactsdb_pgdata:/var/lib/postgresql/data \
+  postgres:16</pre>
+          <img src="img/lab10_docker_run.png" alt="Docker pulling postgres:16 and container running" class="doc-img" onclick="openLightbox('img/lab10_docker_run.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">Then connected to it and created the contacts table:</p>
+          <pre class="doc-code">CREATE DATABASE contacts_db;
+\c contacts_db
+CREATE TABLE IF NOT EXISTS contacts (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150),
+  phone VARCHAR(50)
+);</pre>
+          <img src="img/lab10_table_created.png" alt="psql session showing database and table created, confirmed with \dt" class="doc-img" onclick="openLightbox('img/lab10_table_created.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">I wrote <span class="code-inline">PostgresContactRepository</span> implementing the same <span class="code-inline">IContactRepository</span> interface using parameterized SQL for each operation. Then swapped it in with a one line change in <span class="code-inline">Program.cs</span>, changing <span class="code-inline">AddSingleton</span> to <span class="code-inline">AddScoped</span> since a database backed repository should open a fresh connection per request rather than holding shared state. The connection string password was stored using <span class="code-inline">dotnet user-secrets</span> so it never ended up in source control.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The API works exactly the same from the outside. Same endpoints, same responses. But now data persists across restarts because it lives in a real database instead of a list in memory.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">I ran into several problems along the way:</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Container exited immediately on first run.</strong> Used the <span class="code-inline">--rm</span> flag which deleted the container and its logs automatically when it crashed. Fixed by rerunning without <span class="code-inline">--rm</span> so the logs survived and could be inspected.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>PostgreSQL 18 rejected the standard mount path.</strong> The <span class="code-inline">postgres:latest</span> image had moved to version 18 which changed its expected data directory and hard errored against the older mount path in the setup instructions. A fresh volume did not fix it which confirmed the issue was the image version itself. Fixed by pinning to <span class="code-inline">postgres:16</span>.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Npgsql's latest version dropped support for .NET 7.</strong> Installing without a version number pulled Npgsql 10 which only supports .NET 8, 9 and 10. Fixed by specifying <span class="code-inline">--version 8.0.3</span> which supports .NET 7.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Connection string pasted into the terminal instead of the config file.</strong> Not an actual application error, just a reminder to open the file in the editor rather than typing in the shell.</p>
+          <img src="img/lab10_curl_test.png" alt="curl POST requests creating contacts, GET returning all contacts, and direct SQL SELECT showing the same data in the database" class="doc-img" onclick="openLightbox('img/lab10_curl_test.png')" style="cursor:pointer;">
+          <p class="week-reflection-body" style="margin-top:1rem;">The screenshot above shows the same contacts created through <span class="code-inline">curl</span> requests turning up in a direct SQL <span class="code-inline">SELECT</span> against the database, confirming the data was actually persisted rather than just held in memory.</p>
+          <div class="doc-btn-row" style="margin-top:1rem;">
+            <a href="lab_10.zip" download class="doc-btn">Download Lab 10 Source (.zip)</a>
+            <a href="Lab10_guide.pdf" target="_blank" class="doc-btn">Lab 10 Guide (PDF)</a>
+          </div>
+
+          <p class="week-sub">Plain Language Explanation</p>
+          <p class="week-reflection-body"><strong>What this actually is</strong></p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Lab 6 built a contact storing program, but with one catch. Everything it remembered disappeared the moment the program restarted because it was only ever keeping a list in the computer's working memory. Lab 10 fixes that one problem. Contacts now get written somewhere permanent so they survive a restart, a crash or the computer being turned off entirely.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>What actually changed</strong></p>
+          <p class="week-reflection-body" style="margin-top:1rem;">Picking up the metaphor from Lab 6, there is a front desk that receives every request and a storage clerk who does the actual storing.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The front desk did not change at all. It still receives requests, checks they make sense and passes the work along, exactly as before.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The storage clerk got replaced. Instead of keeping a paper list that gets thrown out whenever the office closes, the new clerk writes everything into a proper filing cabinet, a real database, that stays intact no matter what happens to the front desk.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The front desk never noticed the swap because it never talked to the list or the filing cabinet directly in the first place. It only ever says "storage clerk, please handle this" and lets whoever is on duty deal with the details. That is why replacing the storage mechanism did not require touching the front desk code at all.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Where the filing cabinet actually lives</strong></p>
+          <p class="week-reflection-body" style="margin-top:1rem;">The real database is PostgreSQL, a genuine industry standard database system, the same category of tool real companies use to store customer records, orders and so on. Rather than installing it directly onto the computer it runs inside Docker, which is best understood as a disposable self-contained box. One command turns the database on inside that box, another would remove it completely, and it cannot leave stray files scattered around the computer.</p>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>What happens when you add a contact now</strong></p>
+          <ul class="week-list-body">
+            <li>You send a request: "add a contact named Ada, email ada@example.com"</li>
+            <li>The front desk receives it and checks the name is not blank, same as before</li>
+            <li>The front desk asks the storage clerk to add it, same as before</li>
+            <li>The storage clerk writes a new row into the database contacts table and the database hands back the ID number it assigned</li>
+            <li>The front desk sends back a confirmation including that ID number</li>
+          </ul>
+          <p class="week-reflection-body" style="margin-top:1rem;"><strong>Why this is worth doing</strong></p>
+          <p class="week-reflection-body" style="margin-top:1rem;">An in-memory list is fine for proving the logic works but it is not something you would ever actually rely on. Restart the program, which happens constantly during deployments, crashes and server reboots, and every contact is gone. A real database is what makes the data trustworthy enough to build something real on top of.</p>
+
+          <p class="week-sub">So What</p>
+          <p class="week-reflection-body">This lab showed me exactly why the interface pattern from Lab 6 mattered. What could have been a complete rewrite turned into writing one new class and changing one line. That is a real software engineering principle, design for change. I also got practical experience with Docker for the first time, running a real database locally, and learned about handling credentials safely with user secrets. The problems I ran into were all solvable once I read the error messages carefully, which is becoming a pattern. And with the foundation now properly in place with a real database behind it, I am ready to move on to Lab 12.</p>
         </div>
       </div>
     </div>
