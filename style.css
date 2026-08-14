@@ -215,10 +215,16 @@ section { padding: 5rem 3rem; position: relative; }
 
 /* WEEK NAV */
 .week-nav { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
-.week-tab { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; padding: .75rem 2rem; border: none; background: none; color: var(--muted); cursor: none; border-bottom: 3px solid transparent; transition: all .2s; position: relative; top: 1px; }
+.week-tab { display: inline-flex; align-items: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; padding: .75rem 2rem; border: none; background: none; color: var(--muted); cursor: none; border-bottom: 3px solid transparent; transition: all .2s; position: relative; top: 1px; }
 .week-tab:hover { color: var(--black); }
 .week-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: white; }
-.new-badge { font-family: 'Epilogue', sans-serif; font-size: 10px; letter-spacing: .5px; font-weight: 600; text-transform: uppercase; color: var(--blue); background: var(--blue-light); padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; position: relative; top: -1px; }
+.version-switch { display: inline-flex; border: 1px solid var(--blue); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
+.version-switch-btn { font-family: 'Epilogue', sans-serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--blue); background: white; border: none; padding: .5rem 1.1rem; cursor: pointer; transition: all .2s; }
+.version-switch-btn.active { background: var(--blue); color: white; }
+.version-switch-btn:not(.active):hover { background: var(--blue-light); }
+.arch-version { display: none; }
+.arch-version.active { display: block; }
+.new-badge { font-family: 'Epilogue', sans-serif; font-size: 10px; letter-spacing: .5px; font-weight: 600; text-transform: uppercase; color: var(--blue); background: var(--blue-light); padding: 2px 6px; border-radius: 4px; margin-left: 6px; line-height: 1; }
 
 .week-panel { display: none; background: white; border: 1px solid var(--border); border-top: none; }
 .week-panel.active { display: block; }
