@@ -1083,16 +1083,59 @@ app.UseSwaggerUI();</pre>
           <p class="week-sub">What</p>
           <p class="week-reflection-body">The Swagger UI showed all five endpoints for the Contacts API, each colour coded by method. GET in blue, POST in green, PUT in yellow and DELETE in red. I used the Try it out button on each one to test the full CRUD cycle:</p>
           <img src="img/lab12_swagger_full.png" alt="Full Swagger UI page showing all five endpoints" class="doc-img" onclick="openLightbox('img/lab12_swagger_full.png')" style="cursor:pointer;">
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">GET /api/Contacts</span> — listed all contacts in the database, returned a 200 with the full contact list in JSON format.</p>
-          <img src="img/lab12_get_all.png" alt="GET all contacts, 200 response showing contact list" class="doc-img" onclick="openLightbox('img/lab12_get_all.png')" style="cursor:pointer;">
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">POST /api/Contacts</span> — created a new contact, Ada Lovelace, returned a 201 with the new contact including the ID assigned by the database and a location header pointing to the new resource.</p>
-          <img src="img/lab12_post_create.png" alt="POST creating Ada Lovelace, 201 response" class="doc-img" onclick="openLightbox('img/lab12_post_create.png')" style="cursor:pointer;">
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">GET /api/Contacts/{id}</span> — fetched contact 9 which had already been deleted, returned a 404 Not Found with a proper error body. A good demonstration that the error handling works correctly.</p>
-          <img src="img/lab12_get_404.png" alt="GET by id returning 404" class="doc-img" onclick="openLightbox('img/lab12_get_404.png')" style="cursor:pointer;">
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">PUT /api/Contacts/{id}</span> — updated contact 9 to Ada Byron, returned a 204 No Content confirming the update was successful without returning the updated object.</p>
-          <img src="img/lab12_put_update.png" alt="PUT updating contact, 204 response" class="doc-img" onclick="openLightbox('img/lab12_put_update.png')" style="cursor:pointer;">
-          <p class="week-reflection-body" style="margin-top:1rem;"><span class="code-inline">DELETE /api/Contacts/{id}</span> — deleted contact 9, returned a 204 No Content confirming it was removed.</p>
-          <img src="img/lab12_delete.png" alt="DELETE contact, 204 response" class="doc-img" onclick="openLightbox('img/lab12_delete.png')" style="cursor:pointer;">
+          <hr class="doc-divider">
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/lab12_get_all.png" alt="GET all contacts, 200 response showing contact list" onclick="openLightbox('img/lab12_get_all.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">GET /api/Contacts</span>
+                <p class="doc-img-grid-desc">Listed all contacts in the database, returned a 200 with the full contact list in JSON format.</p>
+              </div>
+            </div>
+          </div>
+          <hr class="doc-divider">
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/lab12_post_create.png" alt="POST creating Ada Lovelace, 201 response" onclick="openLightbox('img/lab12_post_create.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">POST /api/Contacts</span>
+                <p class="doc-img-grid-desc">Created a new contact, Ada Lovelace, returned a 201 with the new contact including the ID assigned by the database and a location header pointing to the new resource.</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/lab12_get_404.png" alt="GET by id returning 404" onclick="openLightbox('img/lab12_get_404.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">GET /api/Contacts/{id}</span>
+                <p class="doc-img-grid-desc">Fetched contact 9 which had already been deleted, returned a 404 Not Found with a proper error body. A good demonstration that the error handling works correctly.</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/lab12_put_update.png" alt="PUT updating contact, 204 response" onclick="openLightbox('img/lab12_put_update.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">PUT /api/Contacts/{id}</span>
+                <p class="doc-img-grid-desc">Updated contact 9 to Ada Byron, returned a 204 No Content confirming the update was successful without returning the updated object.</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+          <div class="doc-img-grid">
+            <div class="doc-img-grid-item">
+              <img src="img/lab12_delete.png" alt="DELETE contact, 204 response" onclick="openLightbox('img/lab12_delete.png')">
+              <div class="doc-img-grid-text">
+                <span class="doc-img-grid-caption">DELETE /api/Contacts/{id}</span>
+                <p class="doc-img-grid-desc">Deleted contact 9, returned a 204 No Content confirming it was removed.</p>
+              </div>
+            </div>
+          </div>
 
           <p class="week-sub">Plain Language Explanation</p>
           <p class="week-reflection-body">Up until now testing the API meant typing curl commands into the terminal every time, which works but is not exactly friendly. Swagger UI solves that by turning the API into a visual interface in the browser. Every endpoint shows up as a button you can click, fill in the details and execute. The response appears right there on screen, no terminal needed.</p>
